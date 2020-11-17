@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MainColor
+    uniqueID: 401843827
+    locked: 0
+  - name: DecorateGround
+    uniqueID: 3309720577
+    locked: 0
+  - name: Player
+    uniqueID: 2203971909
+    locked: 0
+  - name: DecorateObject
+    uniqueID: 2674174773
+    locked: 0
