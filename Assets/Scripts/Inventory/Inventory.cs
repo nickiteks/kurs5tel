@@ -25,6 +25,8 @@ public class Inventory : MonoBehaviour
     public RectTransform movingObject;
     public Vector3 offset;
 
+    public GameObject backGround;
+
     public void Start()
     {
         if(items.Count == 0)
@@ -37,16 +39,57 @@ public class Inventory : MonoBehaviour
             AddItem(i, data.items[Random.Range(0, data.items.Count)], Random.Range(1, 99));
         }
 
-        updateInventiory();
+        UpdateInventiory();
     }
     public void Update()
     {
         if(currentID != -1)
         {
             MoveObject();
-        }       
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            backGround.SetActive(!backGround.activeSelf);
+            if (backGround.activeSelf)
+            {
+                UpdateInventiory();
+            }
+        }
     }
-
+    public void SearchForSameItem(Item item, int count)
+    {
+        for(int i = 0; i < maxCount; i++)
+        {
+            if(items[i].id == item.id)
+            {
+                if(items[0].count < 64)
+                {
+                    items[i].count += count;
+                    if (items[i].count > 64)
+                    {
+                        count = items[i].count - 64;
+                        items[i].count = 32;
+                    }
+                    else
+                    {
+                        count = 0;
+                        i = maxCount;
+                    }
+                }
+            }
+        }
+        if (count > 0)
+        {
+            for(int i =0;i < maxCount; i++)
+            {
+                if(items[i].id == 0)
+                {
+                    AddItem(i, item, count);
+                    i = maxCount;
+                }
+            }
+        }
+    }
     public void AddItem(int id,Item item,int count)
     {
         items[id].id = item.id;
@@ -102,7 +145,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void updateInventiory()
+    public void UpdateInventiory()
     {
         for (int i = 0; i < maxCount; i++)
         {
@@ -131,8 +174,28 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            AddInventoryItem(currentID, items[int.Parse(es.currentSelectedGameObject.name)]);
-            AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), currentItem);
+            ItemInventory II = items[int.Parse(es.currentSelectedGameObject.name)];
+
+            if (currentItem.id != II.id)
+            {
+                AddInventoryItem(currentID, II);
+
+                AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), currentItem);
+            }
+            else
+            {
+                if(II.count + currentItem.count <= 64)
+                {
+                    II.count += currentItem.count;
+                }
+                else
+                {
+                    AddItem(currentID, data.items[II.id], II.count + currentItem.count - 64);
+                    II.count = 64;
+                }
+                II.itemGameObject.GetComponentInChildren<Text>().text = II.count.ToString();
+            }
+
             currentID = -1;
 
             movingObject.gameObject.SetActive(false);
