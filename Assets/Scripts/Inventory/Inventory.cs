@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
 
         for (int i =0; i<maxCount;i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0, data.items.Count)], Random.Range(1, 99));
+            AddItem(i, data.items[Random.Range(0, data.items.Count)], Random.Range(1, 64));
         }
 
         UpdateInventiory();
@@ -193,7 +193,10 @@ public class Inventory : MonoBehaviour
                     AddItem(currentID, data.items[II.id], II.count + currentItem.count - 64);
                     II.count = 64;
                 }
-                II.itemGameObject.GetComponentInChildren<Text>().text = II.count.ToString();
+                if (II.id != 0)
+                {
+                    II.itemGameObject.GetComponentInChildren<Text>().text = II.count.ToString();
+                }
             }
 
             currentID = -1;
