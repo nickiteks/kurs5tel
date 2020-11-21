@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
 {
     public Database data;
 
+    public Item item;
+
     public List<ItemInventory> items = new List<ItemInventory>();
 
     public GameObject gameObjectShow;
@@ -34,11 +36,11 @@ public class Inventory : MonoBehaviour
             AddGraphics();
         }
 
-        for (int i =0; i<maxCount;i++)//тест заполнения
+        for (int i = 0; i<maxCount;i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0, data.items.Count)], Random.Range(1, 64));
+            AddItem(i,item, Random.Range(1, 64));
         }
-
+        //AddItem(4, data.items[1], Random.Range(1, 64));
         UpdateInventiory();
     }
     public void Update()
@@ -210,6 +212,7 @@ public class Inventory : MonoBehaviour
         Vector3 pos = Input.mousePosition + offset;
         pos.z = InventoryMainObject.GetComponent<RectTransform>().position.z;
         movingObject.position = cam.ScreenToWorldPoint(pos);
+        
     }
     public ItemInventory CopyInventoryItem(ItemInventory old)
     {
