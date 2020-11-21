@@ -7,6 +7,8 @@ public class MovementScript : MonoBehaviour
 {
     [SerializeField]
     private int speed = 1;
+    public int Speed { get { return speed; } }
+
     private Rigidbody2D rb;
 
     private void Awake()
