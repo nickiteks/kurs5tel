@@ -18,7 +18,7 @@ public class movement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        rb.velocity = new Vector2(horizontal, vertical);
+        rb.velocity = new Vector2(horizontal, vertical) * 2;
 
 
     }
