@@ -8826,6 +8826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 519420033}
+  item: {fileID: 11400000, guid: 753d3559ef0466c40bffcc47db873a1e, type: 2}
   items: []
   gameObjectShow: {fileID: 3751815808589702237, guid: ded4608b644078f4dbc7a5769b104a6d,
     type: 3}
@@ -8912,15 +8913,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - id: 0
-    name: Emoty
-    img: {fileID: 0}
-  - id: 1
-    name: Energy
-    img: {fileID: 21300000, guid: 56acb1bfd0b1049e89df9be859dc3615, type: 3}
-  - id: 2
-    name: Key
-    img: {fileID: 21300000, guid: 5b54b64aa03a6418fa2cf8b50928ceb9, type: 3}
+  - {fileID: 11400000, guid: e2176d619d588834b96c8a6b6597ab21, type: 2}
+  - {fileID: 11400000, guid: 753d3559ef0466c40bffcc47db873a1e, type: 2}
 --- !u!1001 &634929490
 PrefabInstance:
   m_ObjectHideFlags: 0
