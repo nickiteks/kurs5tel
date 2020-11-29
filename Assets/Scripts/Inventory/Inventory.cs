@@ -20,16 +20,20 @@ public class Inventory : MonoBehaviour
     public EventSystem es;
 
     public int currentID;
-    public ItemInventory currentItem;
 
     public RectTransform movingObject;
     public Vector3 offset;
 
     public GameObject backGround;
 
+    public int cellSize;
+
+    private MovingObgectManager movingObgectManager;
 
     public void Start()
     {
+        movingObgectManager = MovingObgectManager.Instance;
+        movingObgectManager.ItemInventory = null;
         if (items.Count == 0)
         {
             AddGraphics();
@@ -37,9 +41,9 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[1], Random.Range(1, 64));
+            AddItem(i, data.items[1], Random.Range(1, cellSize));
         }
-        //AddItem(4, data.items[1], Random.Range(1, 64));
+
         UpdateInventiory();
     }
     public void Update()
@@ -60,44 +64,6 @@ public class Inventory : MonoBehaviour
         {
             DeleteItem();
             movingObject.gameObject.SetActive(false);
-        }
-    }
-    private bool IsMouseOverUI()
-    {
-        return EventSystem.current.IsPointerOverGameObject();
-    }
-    public void SearchForSameItem(Item item, int count)
-    {
-        for (int i = 0; i < maxCount; i++)
-        {
-            if (items[i].id == item.id)
-            {
-                if (items[0].count < 64)
-                {
-                    items[i].count += count;
-                    if (items[i].count > 64)
-                    {
-                        count = items[i].count - 64;
-                        items[i].count = 32;
-                    }
-                    else
-                    {
-                        count = 0;
-                        i = maxCount;
-                    }
-                }
-            }
-        }
-        if (count > 0)
-        {
-            for (int i = 0; i < maxCount; i++)
-            {
-                if (items[i].id == 0)
-                {
-                    AddItem(i, item, count);
-                    i = maxCount;
-                }
-            }
         }
     }
     public void AddItem(int id, Item item, int count)
@@ -131,11 +97,13 @@ public class Inventory : MonoBehaviour
             items[id].itemGameObject.GetComponentInChildren<Text>().text = "";
         }
     }
+
     public void AddGraphics()
     {
         for (int i = 0; i < maxCount; i++)
         {
             GameObject newItem = Instantiate(gameObjectShow, InventoryMainObject.transform) as GameObject;
+
 
             newItem.name = i.ToString();
             ItemInventory ii = new ItemInventory();
@@ -154,6 +122,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    
     public void UpdateInventiory()
     {
         for (int i = 0; i < maxCount; i++)
@@ -169,51 +138,54 @@ public class Inventory : MonoBehaviour
             items[i].itemGameObject.GetComponent<Image>().sprite = data.items[items[i].id].img;
         }
     }
-
+    
     public void SelectObject()
-    {
-        if (currentID == -1)
+    {      
+        if (movingObgectManager.ItemInventory == null)
         {
             currentID = int.Parse(es.currentSelectedGameObject.name);
-            currentItem = CopyInventoryItem(items[currentID]);
-            movingObject.gameObject.SetActive(true);
-            movingObject.GetComponent<Image>().sprite = data.items[currentItem.id].img;
+            movingObgectManager.ItemInventory = CopyInventoryItem(items[currentID]);
+            if(movingObgectManager.ItemInventory.id != 0)
+            {
+                movingObject.gameObject.SetActive(true);
+                movingObject.GetComponent<Image>().sprite = data.items[movingObgectManager.ItemInventory.id].img;
 
-            AddItem(currentID, data.items[0], 0);
+                AddItem(currentID, data.items[0], 0);
+            }
         }
         else
         {
-            ItemInventory II = items[int.Parse(es.currentSelectedGameObject.name)];
-
-            if (currentItem.id != II.id)
+            if (movingObgectManager.ItemInventory.id != 0)
             {
-                AddInventoryItem(currentID, II);
+                ItemInventory II = items[int.Parse(es.currentSelectedGameObject.name)];
 
-                AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), currentItem);
-            }
-            else
-            {
-                if (II.count + currentItem.count <= 64)
+                if (movingObgectManager.ItemInventory.id != II.id)
                 {
-                    II.count += currentItem.count;
+                    AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), movingObgectManager.ItemInventory);
                 }
                 else
                 {
-                    AddItem(currentID, data.items[II.id], II.count + currentItem.count - 64);
-                    II.count = 64;
-                }
-                if (II.id != 0)
-                {
-                    II.itemGameObject.GetComponentInChildren<Text>().text = II.count.ToString();
+                    if (II.count + movingObgectManager.ItemInventory.count <= cellSize)
+                    {
+                        II.count += movingObgectManager.ItemInventory.count;
+                    }
+                    else
+                    {
+                        AddItem(currentID, data.items[II.id], II.count + movingObgectManager.ItemInventory.count - cellSize);
+                        II.count = cellSize;
+                    }
+                    if (II.id != 0)
+                    {
+                        II.itemGameObject.GetComponentInChildren<Text>().text = II.count.ToString();
+                    }
                 }
             }
-
             currentID = -1;
-
+            movingObgectManager.ItemInventory = null;
             movingObject.gameObject.SetActive(false);
         }
     }
- 
+
     public void MoveObject()
     {
         Vector3 pos = Input.mousePosition + offset;
@@ -232,15 +204,20 @@ public class Inventory : MonoBehaviour
     public void DeleteItem()
     {
         int index = 0;
-        for(int i = 0; i< items.Count;i++)
+        for (int i = 0; i < items.Count; i++)
         {
-            if(items[i].id == 0)
+            if (items[i].id == 0)
             {
                 index = i;
             }
         }
-        currentItem = CopyInventoryItem(items[index]);
+        movingObgectManager.ItemInventory = CopyInventoryItem(items[index]);
         currentID = -1;
+        movingObgectManager.ItemInventory = null;
+    }
+    private bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }
 
@@ -249,6 +226,5 @@ public class ItemInventory
 {
     public int id;
     public GameObject itemGameObject;
-
     public int count;
 }

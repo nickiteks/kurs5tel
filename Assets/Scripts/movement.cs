@@ -10,7 +10,7 @@ public class movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();  
     }
 
     // Update is called once per frame
@@ -19,8 +19,6 @@ public class movement : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(horizontal, vertical) * 2;
-
-
     }
     //
     void Awake()
