@@ -8097,6 +8097,7 @@ MonoBehaviour:
   maxHelth: 500
   armor: 10
   damage: 10
+  inventory: []
 --- !u!212 &189483466
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8957,7 +8958,6 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8994,13 +8994,10 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   es: {fileID: 80698698}
   currentID: -1
-  currentItem:
-    id: 0
-    itemGameObject: {fileID: 0}
-    count: 0
   movingObject: {fileID: 398390320}
   offset: {x: 1, y: -1, z: 0}
   backGround: {fileID: 925107427}
+  cellSize: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -9074,19 +9071,6 @@ MonoBehaviour:
   items:
   - {fileID: 11400000, guid: e2176d619d588834b96c8a6b6597ab21, type: 2}
   - {fileID: 11400000, guid: 753d3559ef0466c40bffcc47db873a1e, type: 2}
---- !u!114 &519420034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b727cdd21ee4b45a8410137b1a3d7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1659130873}
 --- !u!1 &520030353
 GameObject:
   m_ObjectHideFlags: 0
