@@ -20,7 +20,6 @@ public class MovementScript : MonoBehaviour
         switch (direction)
         {
             case MoveDirection.None:
-                transform.rotation = Quaternion.Euler(new Vector2(0, 0));
                 rb.velocity = new Vector2(0, 0);
                 break;
             case MoveDirection.Right:
