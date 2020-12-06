@@ -16,18 +16,6 @@ public class BaseStatsScript : MonoBehaviour
     private int armor;
     [SerializeField]
     private int damage;
-    public List<ItemInventory> inventory = new List<ItemInventory>();
-    public List<ItemInventory> Inventory
-    {
-        get
-        {
-            return inventory;
-        }
-        set
-        {
-            inventory = value;
-        }
-    }
 
     public int Mana
     {

@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
 
     private MovingObgectManager movingObgectManager;
 
-    public void Start()
+    public void Awake()
     {
         movingObgectManager = MovingObgectManager.Instance;
         movingObgectManager.ItemInventory = null;
