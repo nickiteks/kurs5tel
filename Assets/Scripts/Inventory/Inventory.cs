@@ -41,7 +41,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[1], Random.Range(1, cellSize));
+            AddItem(i, data.items[Random.Range(0,3)], Random.Range(1, cellSize));
         }
 
         UpdateInventiory();
@@ -161,7 +161,14 @@ public class Inventory : MonoBehaviour
 
                 if (movingObgectManager.ItemInventory.id != II.id)
                 {
-                    AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), movingObgectManager.ItemInventory);
+                    if (II.id == 0)
+                    {
+                        AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), movingObgectManager.ItemInventory);
+                    }
+                    else
+                    {
+                        AddItem(currentID, data.items[movingObgectManager.ItemInventory.id], movingObgectManager.ItemInventory.count);
+                    }
                 }
                 else
                 {
