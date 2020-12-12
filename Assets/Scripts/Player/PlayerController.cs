@@ -16,8 +16,32 @@ public class PlayerController : MonoBehaviour
     /// Очередь нажатых кнопок. Первый элемент - текущий
     /// </summary>
     private List<MoveDirection> queueMovingButton;
-
+    /// <summary>
+    /// Компонент отвечающий за анимацию объекта
+    /// </summary>
     private Animator animator;
+
+    /// <summary>
+    /// Вкл и Выкл режима взаимодействия с объектами в мире
+    /// </summary>
+    public bool IsInteractionWithWorld 
+    {
+        get => IsInteractionWithWorld;
+        set
+        {
+            if (value)
+            {
+                movementScript.enabled = false;
+                animator.enabled = false;
+            } 
+            else
+            {
+                movementScript.enabled = true;
+                animator.enabled = true;
+            }
+        }
+    }
+
     private void Awake()
     {
         movementScript = GetComponent<MovementScript>();
@@ -29,8 +53,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        DownUpButtonLogic();
-        MovementAnimationLogic();
+        if (!IsInteractionWithWorld)
+        {
+            DownUpButtonLogic();
+            MovementAnimationLogic();
+        }
     }
 
     private void FixedUpdate()
