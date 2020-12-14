@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
-    public Database data;
+    public DatabaseInventory data;
 
     public List<ItemInventory> items = new List<ItemInventory>();
 
@@ -41,7 +41,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0,3)], Random.Range(1, cellSize));
+            AddItem(i, data.items[Random.Range(0,5)], Random.Range(1, cellSize));
         }
 
         UpdateInventiory();

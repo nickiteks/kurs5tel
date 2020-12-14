@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Database : MonoBehaviour
+public class DatabaseInventory : MonoBehaviour
 {
     public List<Item> items = new List<Item>();
 }
