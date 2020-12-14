@@ -6,4 +6,5 @@ using UnityEngine;
 public class Helmet : Item
 {
     public int count;
+
 }
