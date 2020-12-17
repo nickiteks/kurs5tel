@@ -38,10 +38,10 @@ public class Inventory : MonoBehaviour
         {
             AddGraphics();
         }
-
+        
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0,5)], Random.Range(1, cellSize));
+            AddItem(i, data.items[Random.Range(0,6)], Random.Range(1, cellSize));
         }
 
         UpdateInventiory();
