@@ -2,12 +2,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : AbstractController
 {
-    /// <summary>
-    /// Скрипт для передвижения объекта
-    /// </summary>
-    private MovementScript movementScript;
     /// <summary>
     /// Менеджер кнопок
     /// </summary>
@@ -16,10 +12,6 @@ public class PlayerController : MonoBehaviour
     /// Очередь нажатых кнопок. Первый элемент - текущий
     /// </summary>
     private List<MoveDirection> queueMovingButton;
-    /// <summary>
-    /// Компонент отвечающий за анимацию объекта
-    /// </summary>
-    private Animator animator;
 
     /// <summary>
     /// Вкл и Выкл режима взаимодействия с объектами в мире
@@ -65,10 +57,7 @@ public class PlayerController : MonoBehaviour
         MovementLogic();
     }
 
-    /// <summary>
-    /// Логика передвижения
-    /// </summary>
-    private void MovementLogic()
+    protected override void MovementLogic()
     {
         movementScript.Move(queueMovingButton[0]);
     }
@@ -89,7 +78,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(inputManager.moveDown)) queueMovingButton.Remove(MoveDirection.Down);
     }
 
-    private void MovementAnimationLogic()
+    protected override void MovementAnimationLogic()
     {
         if (animator)
         {
