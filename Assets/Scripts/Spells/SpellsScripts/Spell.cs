@@ -7,11 +7,5 @@ public abstract class Spell : ScriptableObject
     public int id;
     public string name;
     public Sprite img;
-    public int impact;
-    public int manacost;
-
-    public int Activate()
-    {
-        return impact;
-    }   
+    public int manacost;  
 }

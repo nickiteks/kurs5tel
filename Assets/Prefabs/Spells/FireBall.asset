@@ -15,5 +15,7 @@ MonoBehaviour:
   id: 0
   name: FireBall
   img: {fileID: 21300000, guid: 2d0997ac1b1fd664e98202450e7ea2d7, type: 3}
-  impact: 100
   manacost: 20
+  impact: 100
+  isSoloTarget: 1
+  isFriendly: 0
