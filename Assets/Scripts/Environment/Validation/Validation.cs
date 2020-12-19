@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Validation : MonoBehaviour
 {
-    public bool isFriendly;
+    public void CheckDialogFile()
+    {
+
+    }
 }
