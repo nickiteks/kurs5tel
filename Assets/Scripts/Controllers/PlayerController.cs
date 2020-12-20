@@ -14,11 +14,22 @@ public class PlayerController : AbstractController
     private List<MoveDirection> queueMovingButton;
 
     /// <summary>
+    /// Текущее направление игрока
+    /// </summary>
+    public MoveDirection CurrentMoveDirection { get { return queueMovingButton[0]; } }
+
+    /// <summary>
+    /// Задаёт направление для преследователей
+    /// </summary>
+    private MainPlayerFollowScript mainPlayerFollowScript;
+
+    /// <summary>
     /// Вкл и Выкл режима взаимодействия с объектами в мире
     /// </summary>
+    private bool isInteractionWithWorld;
     public bool IsInteractionWithWorld 
     {
-        get => IsInteractionWithWorld;
+        get { return isInteractionWithWorld; }
         set
         {
             if (value)
@@ -31,16 +42,25 @@ public class PlayerController : AbstractController
                 movementScript.enabled = true;
                 animator.enabled = true;
             }
+
+            isInteractionWithWorld = value;
         }
     }
+
+    /// <summary>
+    /// Последнее зафиксированное направление
+    /// </summary>
+    private MoveDirection lastDirection;
 
     private void Awake()
     {
         movementScript = GetComponent<MovementScript>();
         animator = GetComponent<Animator>();
+        mainPlayerFollowScript = GetComponent<MainPlayerFollowScript>();
 
         inputManager = InputManager.Instance;
         queueMovingButton = new List<MoveDirection>() { MoveDirection.None };
+        lastDirection = MoveDirection.None;
     }
 
     private void Update()
@@ -48,13 +68,14 @@ public class PlayerController : AbstractController
         if (!IsInteractionWithWorld)
         {
             DownUpButtonLogic();
-            MovementAnimationLogic();
+            MovementAnimationLogic(queueMovingButton[0]);
         }
     }
 
     private void FixedUpdate()
     {
         MovementLogic();
+        ControlSwitchMoveDirection();
     }
 
     protected override void MovementLogic()
@@ -78,34 +99,12 @@ public class PlayerController : AbstractController
         if (Input.GetKeyUp(inputManager.moveDown)) queueMovingButton.Remove(MoveDirection.Down);
     }
 
-    protected override void MovementAnimationLogic()
+    /// <summary>
+    /// Отлавливание смены направления
+    /// </summary>
+    private void ControlSwitchMoveDirection()
     {
-        if (animator)
-        {
-            switch (queueMovingButton[0])
-            {
-                case MoveDirection.Up:
-                    animator.SetBool("BackRun", true);
-                    animator.SetBool("SideRun", false);
-                    animator.SetBool("FrontRun", false);
-                    break;
-                case MoveDirection.Down:
-                    animator.SetBool("BackRun", false);
-                    animator.SetBool("SideRun", false);
-                    animator.SetBool("FrontRun", true);
-                    break;
-                case MoveDirection.Right:
-                case MoveDirection.Left:
-                    animator.SetBool("BackRun", false);
-                    animator.SetBool("SideRun", true);
-                    animator.SetBool("FrontRun", false);
-                    break;
-                case MoveDirection.None:
-                    animator.SetBool("BackRun", false);
-                    animator.SetBool("SideRun", false);
-                    animator.SetBool("FrontRun", false);
-                    break;
-            }
-        }
+        if (queueMovingButton[0] != lastDirection && queueMovingButton[0] != MoveDirection.None) 
+            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
     }
 }
