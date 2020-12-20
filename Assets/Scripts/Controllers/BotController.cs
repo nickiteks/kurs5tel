@@ -5,30 +5,27 @@ using UnityEngine.EventSystems;
 
 public class BotController : AbstractController
 {
-    protected IFollow followScript;
+    protected FollowScript followScript;
 
     private void Awake()
     {
-        followScript = GetComponent<IFollow>();
+        followScript = GetComponent<FollowScript>();
         movementScript = GetComponent<MovementScript>();
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        MovementAnimationLogic(followScript.CurrentMoveDirection);
+    }
+
     private void FixedUpdate()
     {
-        if (followScript.CurrentPoint != null)
-        {
-            MovementLogic();
-            MovementAnimationLogic(followScript.CurrentPoint.NextMoveDirection);
-        }
-        else
-        {
-            MovementAnimationLogic(MoveDirection.None);
-        }
+        MovementLogic();
     }
 
     protected override void MovementLogic()
     {
-        movementScript.Move(followScript.CurrentPoint.Position);
+        movementScript.Move(followScript.CurrentMoveDirection);
     }
 }
