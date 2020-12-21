@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class MovementScript : MonoBehaviour
 {
     [SerializeField]
-    private int speed = 1;
-    public int Speed { get { return speed; } }
+    private float speed;
+    public float Speed { get { return speed; } }
 
     [SerializeField]
     private Rigidbody2D rb;
@@ -15,6 +15,17 @@ public class MovementScript : MonoBehaviour
     private Vector2 horizontalDirection = new Vector2(1, 0);
     private Vector2 verticalDirection = new Vector2(0, 1);
 
+    private new Transform transform;
+
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
+    /// <summary>
+    /// Идти по заданному напрвлению
+    /// </summary>
+    /// <param name="direction"></param>
     public void Move(MoveDirection direction)
     {
         switch (direction)
@@ -39,5 +50,14 @@ public class MovementScript : MonoBehaviour
                 rb.velocity = -verticalDirection * speed;
                 break;
         }
+    }
+
+    /// <summary>
+    /// Идти к точке
+    /// </summary>
+    /// <param name="position"></param>
+    public void Move(Vector2 position)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, position, speed);
     }
 }
