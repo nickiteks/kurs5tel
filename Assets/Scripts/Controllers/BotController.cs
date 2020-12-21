@@ -14,18 +14,21 @@ public class BotController : AbstractController
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
-    {
-        MovementAnimationLogic(followScript.CurrentMoveDirection);
-    }
-
     private void FixedUpdate()
     {
-        MovementLogic();
+        if (followScript.CurrentPoint != null)
+        {
+            MovementLogic();
+            MovementAnimationLogic(followScript.CurrentPoint.NextMoveDirection);
+        }
+        else
+        {
+            MovementAnimationLogic(MoveDirection.None);
+        }
     }
 
     protected override void MovementLogic()
     {
-        movementScript.Move(followScript.CurrentMoveDirection);
+        movementScript.Move(followScript.CurrentPoint.Position);
     }
 }
