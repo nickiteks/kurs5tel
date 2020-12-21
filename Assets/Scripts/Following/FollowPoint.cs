@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 [System.Serializable]
 public class FollowPoint
@@ -18,18 +19,11 @@ public class FollowPoint
     /// Точка смены направления, которую надо достич
     /// </summary>
     public Vector2 Position { get; private set; }
-    public int index;
 
-    public FollowPoint(int delayTime, Vector2 position, MoveDirection direction, int index)
+    public FollowPoint(int delayTime, Vector2 position, MoveDirection direction)
     {
         NextMoveDirection = direction;
         DelayTime = delayTime;
         Position = position;
-        this.index = index;
-    }
-
-    public override string ToString()
-    {
-        return $"NextMoveDirection - {NextMoveDirection} Position - {Position} Index - {index}";
     }
 }
