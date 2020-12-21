@@ -9,7 +9,7 @@ public class MainPlayerFollowScript : MonoBehaviour
     public GameObject gameObject1;
     public void CreateFollowPoint(FollowPoint followPoint)
     {
-        Instantiate(gameObject1, followPoint.Position, Quaternion.identity);
+        //Instantiate(gameObject1, followPoint.Position, Quaternion.identity);
         foreach (FollowScript follower in followers)
         {
             follower.AddFollowPoint(followPoint);

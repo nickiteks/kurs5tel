@@ -59,6 +59,11 @@ public class PlayerController : AbstractController
         queueMovingButton = new List<MoveDirection>() { MoveDirection.None };
     }
 
+    private void Start()
+    {
+        mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, transform.position, MoveDirection.Left));
+    }
+
     private void Update()
     {
         if (!IsInteractionWithWorld)
@@ -84,28 +89,28 @@ public class PlayerController : AbstractController
     /// </summary>
     private void DownUpButtonLogic()
     {
-        if (Input.GetKeyDown(inputManager.moveRight))
+        MoveDirection direction = MoveDirection.None;
+        if (Input.GetKeyDown(inputManager.moveRight)) direction = MoveDirection.Right;
+        if (Input.GetKeyDown(inputManager.moveLeft)) direction = MoveDirection.Left;
+        if (Input.GetKeyDown(inputManager.moveUp)) direction = MoveDirection.Up;
+        if (Input.GetKeyDown(inputManager.moveDown)) direction = MoveDirection.Down;
+
+        if (direction != MoveDirection.None)
         {
-            queueMovingButton.Insert(0, MoveDirection.Right);
-            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0], index++));
+            if (queueMovingButton[0] == MoveDirection.None)
+            {
+                queueMovingButton.Insert(0, direction);
+                mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
+            }
+            else
+            {
+                mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
+                queueMovingButton.Insert(0, direction);
+            }
+
             distance = transform.position;
         }
-        if (Input.GetKeyDown(inputManager.moveLeft))
-        {
-            queueMovingButton.Insert(0, MoveDirection.Left);
-            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0], index++));
-            distance = transform.position;
-        }
-        if (Input.GetKeyDown(inputManager.moveUp)) {
-            queueMovingButton.Insert(0, MoveDirection.Up);
-            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0], index++));
-            distance = transform.position;
-        }
-        if (Input.GetKeyDown(inputManager.moveDown)) {
-            queueMovingButton.Insert(0, MoveDirection.Down);
-            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0], index++));
-            distance = transform.position;
-        }
+        
 
         if (Input.GetKeyUp(inputManager.moveRight)) queueMovingButton.Remove(MoveDirection.Right);
         if (Input.GetKeyUp(inputManager.moveLeft)) queueMovingButton.Remove(MoveDirection.Left);
@@ -118,9 +123,9 @@ public class PlayerController : AbstractController
     /// </summary>
     private void ControlSwitchMoveDirection()
     {
-        if (Vector2.Distance(transform.position, distance) >= 1)
+        if (Vector2.Distance(transform.position, distance) >= 1 && queueMovingButton[0] != MoveDirection.None)
         {
-            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0], index++));
+            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
             distance = transform.position;
         }
             
