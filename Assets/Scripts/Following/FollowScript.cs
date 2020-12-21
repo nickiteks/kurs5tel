@@ -8,8 +8,8 @@ public class FollowScript : MonoBehaviour
     /// <summary>
     /// Точки за которыми нужно следовать
     /// </summary>
-    private Queue<FollowPoint> followPoints = new Queue<FollowPoint>();
-
+    public List<FollowPoint> followPoints = new List<FollowPoint>();
+    public GameObject gameObject1;
     /// <summary>
     /// Ссылка на игрока
     /// </summary>
@@ -20,64 +20,56 @@ public class FollowScript : MonoBehaviour
     /// <summary>
     /// Необходимое текущее направление
     /// </summary>
-    public MoveDirection CurrentMoveDirection { get; set; }
+    public FollowPoint CurrentPoint { get; set; }
 
     /// <summary>
     /// Проверка паузы у currentFollowPoint
     /// </summary>
-    private bool canMove;
-
-
-    private float currentDistance;
-    private float lastDistance;
-
-    private void Start()
-    {
-        CurrentMoveDirection = MoveDirection.None;
-        canMove = true;
-    }
-
-    private void Update()
-    {
-        if (followPoints.Count == 0) return;
-        // если есть ссылка на игрока, то синхранизируем остановку персонажа и игрока
-        if (playerController) SynchronizationStopingWithPlayer();
-        if (!canMove)
-        {
-            CurrentMoveDirection = MoveDirection.None;
-            return;
-        }
-
-        
-    }
+    private bool canMove = false;
 
     private void FixedUpdate()
     {
         if (followPoints.Count == 0) return;
-        // если мы достигли точки или случайно прошли мимо...
-        if ((currentDistance = Vector2.Distance(transform.position, followPoints.Peek().Position)) <= 0.1 || lastDistance > currentDistance)
+
+        if (playerController) FollowPlayer();
+        else FollowPath();
+    }
+
+    private void FollowPlayer()
+    {
+        SynchronizationStopingWithPlayer();
+        if (canMove && Vector2.Distance(transform.position, followPoints[0].Position) == 0)
         {
-            // удаляем точку
-            followPoints.Dequeue();
-            canMove = false;
+            //transform.position = followPoints[0].Position;
+            followPoints.RemoveAt(0);
 
-            CurrentMoveDirection = followPoints.Peek().NextMoveDirection;
+            CurrentPoint = followPoints[0];
+        }
+    }
 
-            // останавливаемся персонажа на необходимое время
-            Invoke(nameof(SetValueCanMoveTrue), followPoints.Peek().DelayTime);
-
-            lastDistance = currentDistance;
-        } 
-        else
+    private void FollowPath()
+    {
+        if(canMove && Vector2.Distance(transform.position, followPoints[0].Position) <= 0.1)
         {
-            lastDistance = currentDistance;
+            transform.position = followPoints[0].Position;
+
+            if (followPoints[0].DelayTime != 0)
+            {
+                canMove = false;
+                Invoke(nameof(SetValueCanMoveTrue), followPoints[0].DelayTime);
+            }
+
+            FollowPoint point = followPoints[0];
+            followPoints.RemoveAt(0);
+            followPoints.Add(point);
+
+            CurrentPoint = followPoints[0];
         }
     }
 
     public void AddFollowPoint(FollowPoint followPoint)
     {
-        followPoints.Enqueue(followPoint);
-        CurrentMoveDirection = followPoints.Peek().NextMoveDirection;
+        followPoints.Add(followPoint);
     }
 
     /// <summary>
@@ -93,6 +85,15 @@ public class FollowScript : MonoBehaviour
     /// </summary>
     private void SynchronizationStopingWithPlayer()
     {
-        canMove = playerController.CurrentMoveDirection != MoveDirection.None;
+        if (playerController.CurrentMoveDirection == MoveDirection.None || followPoints.Count == 0)
+        {
+            canMove = false;
+            CurrentPoint = null;
+        }
+        else
+        {
+            canMove = true;
+            CurrentPoint = followPoints[0];
+        }
     }
 }

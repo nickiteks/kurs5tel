@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
+[System.Serializable]
 public class FollowPoint
 {
     /// <summary>
