@@ -8,8 +8,9 @@ public class FollowScript : MonoBehaviour
     /// <summary>
     /// Точки за которыми нужно следовать
     /// </summary>
-    private Queue<FollowPoint> followPoints = new Queue<FollowPoint>();
-
+    private readonly Queue<FollowPoint> followPoints = new Queue<FollowPoint>();
+    private List<FollowPoint> followPointsList = new List<FollowPoint>();
+    public GameObject gameObject1;
     /// <summary>
     /// Ссылка на игрока
     /// </summary>
@@ -28,8 +29,8 @@ public class FollowScript : MonoBehaviour
     private bool canMove;
 
 
-    private float currentDistance;
-    private float lastDistance;
+    private float currentDistance = 1;
+    private float lastDistance = 1000;
 
     private void Start()
     {
@@ -37,47 +38,49 @@ public class FollowScript : MonoBehaviour
         canMove = true;
     }
 
-    private void Update()
-    {
-        if (followPoints.Count == 0) return;
-        // если есть ссылка на игрока, то синхранизируем остановку персонажа и игрока
-        if (playerController) SynchronizationStopingWithPlayer();
-        if (!canMove)
-        {
-            CurrentMoveDirection = MoveDirection.None;
-            return;
-        }
-
-        
-    }
-
     private void FixedUpdate()
     {
-        if (followPoints.Count == 0) return;
+        float i = 0;
+        if (playerController) SynchronizationStopingWithPlayer();
+        if (followPoints.Count == 0 || !canMove) return;
+
+
+        currentDistance = Vector2.Distance(transform.position, followPoints.Peek().Position);
+        Debug.Log($"{transform.position.x}   {transform.position.y}  1");
         // если мы достигли точки или случайно прошли мимо...
-        if ((currentDistance = Vector2.Distance(transform.position, followPoints.Peek().Position)) <= 0.1 || lastDistance > currentDistance)
+        if (currentDistance <= 0.1 || (lastDistance < currentDistance))
         {
+            //Debug.Log($"Current Distance - {currentDistance} Last Distance - {lastDistance} Position - {transform.position} | FollowPoint - {followPoints.Peek()}");
+            Instantiate(gameObject1, transform.position, Quaternion.identity);
             // удаляем точку
             followPoints.Dequeue();
+            followPointsList.RemoveAt(0);
             canMove = false;
 
-            CurrentMoveDirection = followPoints.Peek().NextMoveDirection;
+            //CurrentMoveDirection = MoveDirection.None;
 
             // останавливаемся персонажа на необходимое время
             Invoke(nameof(SetValueCanMoveTrue), followPoints.Peek().DelayTime);
+            
+            lastDistance = Vector2.Distance(transform.position, followPoints.Peek().Position);
+            Debug.Log($"{transform.position.x}   {transform.position.y}  2");
 
-            lastDistance = currentDistance;
+            Debug.Log($"Current Distance - {currentDistance} Last Distance - {lastDistance} Position - {transform.position} | FollowPoint - {followPoints.Peek()}");
         } 
         else
         {
+            i = lastDistance;
             lastDistance = currentDistance;
         }
+
+        //Debug.Log($"Last Distance - {i} Current Distance - {currentDistance} Position - {transform.position}");
     }
 
     public void AddFollowPoint(FollowPoint followPoint)
     {
         followPoints.Enqueue(followPoint);
-        CurrentMoveDirection = followPoints.Peek().NextMoveDirection;
+        followPointsList.Add(followPoint);
+        
     }
 
     /// <summary>
@@ -93,6 +96,16 @@ public class FollowScript : MonoBehaviour
     /// </summary>
     private void SynchronizationStopingWithPlayer()
     {
-        canMove = playerController.CurrentMoveDirection != MoveDirection.None;
+        if (playerController.CurrentMoveDirection == MoveDirection.None || followPoints.Count == 0)
+        {
+            canMove = false;
+            CurrentMoveDirection = MoveDirection.None;
+        }
+        else
+        {
+            canMove = true;
+            CurrentMoveDirection = followPoints.Peek().NextMoveDirection;
+        }
+        
     }
 }

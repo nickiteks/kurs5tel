@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class New : MonoBehaviour
+public class Test1233 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject plaer;
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(Vector2.Distance(plaer.transform.position, transform.position));
     }
 }
