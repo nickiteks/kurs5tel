@@ -59,5 +59,8 @@ public class MovementScript : MonoBehaviour
     public void Move(Vector2 position)
     {
         transform.position = Vector2.MoveTowards(transform.position, position, speed);
+
+        if (position.x < transform.position.x) transform.rotation = Quaternion.Euler(new Vector2(0, 180));
+        else transform.rotation = Quaternion.Euler(new Vector2(0, 0));
     }
 }
