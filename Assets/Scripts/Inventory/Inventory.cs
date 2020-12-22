@@ -62,14 +62,7 @@ public class Inventory : MonoBehaviour
         {
             MoveObject();
         }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            backGround.SetActive(!backGround.activeSelf);
-            if (backGround.activeSelf)
-            {
-                UpdateInventiory();
-            }
-        }
+       
         if (!IsMouseOverUI() && Input.GetKeyDown(KeyCode.Mouse0))
         {
             DeleteItem();
@@ -255,5 +248,14 @@ public class Inventory : MonoBehaviour
     private bool IsMouseOverUI()
     {
         return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    private void OpenInventory()
+    {
+            backGround.SetActive(!backGround.activeSelf);
+            if (backGround.activeSelf)
+            {
+                UpdateInventiory();
+            }
     }
 }
