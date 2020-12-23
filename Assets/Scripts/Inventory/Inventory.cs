@@ -19,13 +19,9 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private int maxCount;
 
-    [SerializeField]
-    private Camera cam;
-    [SerializeField]
     private EventSystem es;
 
-    [SerializeField]
-    private int currentID;
+    private int currentID = -1;
 
     [SerializeField]
     private RectTransform movingObject;
@@ -33,7 +29,7 @@ public class Inventory : MonoBehaviour
     private Vector3 offset;
 
     [SerializeField]
-    private GameObject backGround;
+    private Canvas canvas;
 
     [SerializeField]
     private int cellSize;
@@ -51,9 +47,9 @@ public class Inventory : MonoBehaviour
         
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0,6)], Random.Range(1, cellSize));
+            AddItem(i, data.items[Random.Range(0,2)], Random.Range(1, cellSize));
         }
-
+        es = FindObjectOfType<EventSystem>();
         UpdateInventiory();
     }
     public void Update()
@@ -62,7 +58,6 @@ public class Inventory : MonoBehaviour
         {
             MoveObject();
         }
-       
         if (!IsMouseOverUI() && Input.GetKeyDown(KeyCode.Mouse0))
         {
             DeleteItem();
@@ -121,8 +116,10 @@ public class Inventory : MonoBehaviour
 
 
             newItem.name = i.ToString();
-            ItemInventory itemInventory = new ItemInventory();
-            itemInventory.itemGameObject = newItem;
+            ItemInventory itemInventory = new ItemInventory
+            {
+                itemGameObject = newItem
+            };
 
             RectTransform rt = newItem.GetComponent<RectTransform>();
             rt.localPosition = new Vector3(0, 0, 0);
@@ -214,16 +211,16 @@ public class Inventory : MonoBehaviour
 
     private void MoveObject()
     {
-        Vector3 pos = Input.mousePosition + offset;
-        pos.z = InventoryMainObject.GetComponent<RectTransform>().position.z;
-        movingObject.position = cam.ScreenToWorldPoint(pos);
+        movingObject.position = Input.mousePosition + offset;
     }
     private ItemInventory CopyInventoryItem(ItemInventory old)
     {
-        ItemInventory New = new ItemInventory();
-        New.id = old.id;
-        New.itemGameObject = old.itemGameObject;
-        New.count = old.count;
+        ItemInventory New = new ItemInventory
+        {
+            id = old.id,
+            itemGameObject = old.itemGameObject,
+            count = old.count
+        };
 
         return New;
     }
@@ -250,12 +247,14 @@ public class Inventory : MonoBehaviour
         return EventSystem.current.IsPointerOverGameObject();
     }
 
-    private void OpenInventory()
+    public void OpenInventory()
     {
-            backGround.SetActive(!backGround.activeSelf);
-            if (backGround.activeSelf)
-            {
-                UpdateInventiory();
-            }
+        canvas.enabled = true;
+        UpdateInventiory();
+    }
+
+    public void CloseInventory() 
+    {
+        canvas.enabled = false;
     }
 }
