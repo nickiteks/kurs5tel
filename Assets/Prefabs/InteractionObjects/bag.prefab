@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 8152601360457320473}
   - component: {fileID: 8152601360457320479}
   - component: {fileID: 8152601360457320478}
-  - component: {fileID: 4843057857990553548}
   m_Layer: 0
   m_Name: bag
   m_TagString: Untagged
@@ -350,32 +349,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.16
---- !u!61 &4843057857990553548
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8152601360457320474}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.01712358, y: -0.04567188}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.365937, y: 2.3316398}
-  m_EdgeRadius: 0
 --- !u!1 &8152601360647328657
 GameObject:
   m_ObjectHideFlags: 0
