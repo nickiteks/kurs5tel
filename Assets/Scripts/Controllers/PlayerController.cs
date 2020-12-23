@@ -75,8 +75,11 @@ public class PlayerController : AbstractController
 
     private void FixedUpdate()
     {
-        MovementLogic();
-        ControlSwitchMoveDirection();
+        if (!IsInteractionWithWorld)
+        {
+            MovementLogic();
+            ControlSwitchMoveDirection();
+        }
     }
 
     protected override void MovementLogic()
