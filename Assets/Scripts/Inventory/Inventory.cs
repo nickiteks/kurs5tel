@@ -206,7 +206,7 @@ public class Inventory : MonoBehaviour
                     }
                     if (itemInventory.id != 0)
                     {
-                        itemInventory.itemGameObject.GetComponentInChildren<Text>().text = itemInventory.count.ToString();
+                        itemInventory.itemGameObject.GetComponentInChildren<TMP_Text>().text = itemInventory.count.ToString();
                     }
                 }
             }
