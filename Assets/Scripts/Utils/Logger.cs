@@ -16,7 +16,7 @@ public class Logger
 
     public void Log(string info)
     {
-        StreamWriter sw = new StreamWriter(filePath, true);
+        StreamWriter sw = new StreamWriter(filePath);
         sw.WriteLine(info);
         sw.Close();
 
