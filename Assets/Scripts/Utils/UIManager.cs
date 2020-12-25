@@ -6,9 +6,22 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
     private Inventory playerInventory;
+    bool isIventoryOpen = false;
     [SerializeField]
     private RectTransform switchScenePanel;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && !isIventoryOpen)
+        {
+            OpenPlayerInventory();
+        }
+        else if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && isIventoryOpen) 
+        {
+            ClosePlayerInventory();
+        }
+            
+    }
     public void OpenSwitchScenePanel()
     {
         switchScenePanel.gameObject.SetActive(true);
@@ -22,11 +35,13 @@ public class UIManager : Singleton<UIManager>
     public void OpenPlayerInventory()
     {
         playerInventory.OpenInventory();
+        isIventoryOpen = true;
     }
 
     public void ClosePlayerInventory()
     {
         playerInventory.CloseInventory();
+        isIventoryOpen = false;
     }
 
     public void OpenPanel(RectTransform rectTransform)

@@ -173,7 +173,7 @@ public class Inventory : MonoBehaviour
         {
             if (movingObgectManager.ItemInventory.id != 0)
             {
-                ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
+                    ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
 
                 if (movingObgectManager.ItemInventory.id != itemInventory.id)
                 {
@@ -207,6 +207,8 @@ public class Inventory : MonoBehaviour
             movingObgectManager.ItemInventory = null;
             movingObject.gameObject.SetActive(false);
         }
+
+        UpdateInventiory();
     }
 
     private void MoveObject()

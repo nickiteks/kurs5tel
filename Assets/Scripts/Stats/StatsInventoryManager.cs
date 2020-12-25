@@ -12,7 +12,7 @@ public class StatsInventoryManager : MonoBehaviour
     private EventSystem es;
     [SerializeField]
     private BaseStatsScript StatsContainer;
-    public DatabaseInventory database = new DatabaseInventory();
+    public DatabaseInventory database;
     public MovingObgectManager movingObgect;
     public void CellScanner()
     {
