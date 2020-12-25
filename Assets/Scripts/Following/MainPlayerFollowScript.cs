@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class MainPlayerFollowScript : MonoBehaviour
 {
     [SerializeField]
-    private List<FollowScript> followers = new List<FollowScript>();
+    private List<FollowPlayerScript> followers = new List<FollowPlayerScript>();
 
     [SerializeField]
     private float distanceCreatePoint;
@@ -14,7 +14,7 @@ public class MainPlayerFollowScript : MonoBehaviour
 
     public void CreateFollowPoint(FollowPoint followPoint)
     {
-        foreach (FollowScript follower in followers)
+        foreach (FollowPlayerScript follower in followers)
         {
             follower.AddFollowPoint(followPoint);
         }
