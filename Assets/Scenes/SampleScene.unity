@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3807098}
   - component: {fileID: 3807097}
   m_Layer: 5
-  m_Name: No
+  m_Name: NoButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3807098}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 871065134}
+        m_MethodName: ClosePanel
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 579588697}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.RectTransform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3807098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +356,7 @@ Transform:
   - {fileID: 1765843840}
   - {fileID: 270195711}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &48669382
 GameObject:
@@ -439,7 +450,7 @@ RectTransform:
   m_Children:
   - {fileID: 579588697}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -625,7 +636,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1620792523
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: c008626f5108946299e1a584ba85fa5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -14869,7 +14880,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &545650198
 RectTransform:
@@ -14937,36 +14948,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1926386392}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &568216168
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 568216169}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &568216169
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568216168}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &579588696
 GameObject:
   m_ObjectHideFlags: 0
@@ -14983,8 +14964,8 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 0
 --- !u!224 &579588697
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21828,7 +21809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 0}
-  switchScenePanel: {fileID: 0}
+  switchScenePanel: {fileID: 579588697}
 --- !u!4 &884965065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6207528775937786036, guid: a13da97bf57558549a2ecdf0966de1e7,
@@ -22055,7 +22036,7 @@ Transform:
   - {fileID: 404257648}
   - {fileID: 1100686456}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1001987892
 PrefabInstance:
@@ -91148,7 +91129,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1620792523
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 8c69f3cd16f534bec8236a6484f500d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93785,7 +93766,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1078155482
 RectTransform:
@@ -104292,6 +104273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656506620}
   - component: {fileID: 1656506619}
+  - component: {fileID: 1656506621}
   m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
@@ -104346,8 +104328,21 @@ Transform:
   - {fileID: 1069743624}
   - {fileID: 2114340814}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1656506621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656506618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79e6bf50d46d5c449a8fe9bbe31a213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameSwitchLocation: FightScene
 --- !u!4 &1661702016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952605751218769700, guid: 0369a8d264193ec4bb9279691b005a24,
@@ -104617,7 +104612,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1694665831
 RectTransform:
@@ -105063,7 +105058,7 @@ Transform:
   - {fileID: 1155967631}
   - {fileID: 871065133}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1839101254
 PrefabInstance:
@@ -105251,6 +105246,11 @@ PrefabInstance:
     - target: {fileID: 1806803267079987312, guid: 8b6cfa8d30348614887c02bc6fc2b4d8,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806803267079987312, guid: 8b6cfa8d30348614887c02bc6fc2b4d8,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1806803267079987318, guid: 8b6cfa8d30348614887c02bc6fc2b4d8,
@@ -105784,7 +105784,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1951374821 stripped
 Transform:
@@ -105873,7 +105873,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1957516450}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1656506621}
+        m_MethodName: LoadLocation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1957516450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106042,7 +106053,7 @@ Transform:
   - {fileID: 1629177319}
   - {fileID: 1547708317}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2067633004 stripped
 Transform:
@@ -106171,7 +106182,7 @@ Transform:
   - {fileID: 659617596}
   - {fileID: 307257341}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2106324681
 PrefabInstance:

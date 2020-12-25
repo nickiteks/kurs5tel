@@ -15,8 +15,11 @@ public class SwitchSceneScript : MonoBehaviour
         SceneManager.LoadScene(nameSwitchLocation);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        UIManager.Instance.OpenSwitchScenePanel();
+        if (collision.gameObject.tag == "Player")
+        {
+            UIManager.Instance.OpenSwitchScenePanel();
+        }
     }
 }
