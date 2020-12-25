@@ -17,19 +17,21 @@ public class OpenInventoryCorpseInteraction : MonoBehaviour, IInteractive
 
     [SerializeField]
     private Button buttonCloseInventory;
-
+    private Logger logger;
     private void Awake()
     {
         canvas.enabled = false;
         buttonCloseInventory.onClick.AddListener(delegate { CancelAction(); });
 
         tmpText.text = InputManager.Instance.interaction.ToString();
+        logger = new Logger("interactionLogs");
     }
 
     public void Action()
     {
         enemyInventory.OpenInventory();
         UIManager.Instance.OpenPlayerInventory();
+        logger.Log("Script:OpenInventoryCorpseInteraction" + " GameObject:" + gameObject.name + " Position:" + transform.position);
     }
 
     public void CancelAction()

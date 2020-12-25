@@ -1,0 +1,1 @@
+Script:OpenInventoryCorpseInteraction GameObject:bag Position:(14.9, -23.5, 0.0)
