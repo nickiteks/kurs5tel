@@ -48,7 +48,7 @@ public class PlayerController : AbstractController
     }
 
     private Vector2 distance = new Vector2(0, 0);
-    int index = 0;
+
     private void Awake()
     {
         movementScript = GetComponent<MovementScript>();
@@ -57,11 +57,6 @@ public class PlayerController : AbstractController
 
         inputManager = InputManager.Instance;
         queueMovingButton = new List<MoveDirection>() { MoveDirection.None };
-    }
-
-    private void Start()
-    {
-        mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, transform.position, MoveDirection.Left));
     }
 
     private void Update()
@@ -126,11 +121,16 @@ public class PlayerController : AbstractController
     /// </summary>
     private void ControlSwitchMoveDirection()
     {
-        if (Vector2.Distance(transform.position, distance) >= 1 && queueMovingButton[0] != MoveDirection.None)
+        if (Vector2.Distance(transform.position, distance) >= mainPlayerFollowScript.DistanceCreatePoint && queueMovingButton[0] != MoveDirection.None)
         {
             mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
             distance = transform.position;
-        }
-            
+        }  
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        queueMovingButton.Clear();
+        queueMovingButton.Add(MoveDirection.None);
     }
 }
