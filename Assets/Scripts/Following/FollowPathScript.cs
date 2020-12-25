@@ -51,7 +51,6 @@ public class FollowPathScript : MonoBehaviour, IFollow
         canMove = true;
         SwitchPoint();
         CurrentPoint = new FollowPoint(followPoints[0].DelayTime, followPoints[0].transform.position, followPoints[0].NextMoveDirection);
-        Debug.Log("SetValueCanMoveTrue");
     }
 
     private void SwitchPoint()
