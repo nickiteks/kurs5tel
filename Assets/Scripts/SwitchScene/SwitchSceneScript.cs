@@ -10,14 +10,13 @@ public class SwitchSceneScript : MonoBehaviour
     /// </summary>
     [SerializeField]
     private string nameSwitchLocation;
-
-    private void LoadLocation()
+    public void LoadLocation()
     {
         SceneManager.LoadScene(nameSwitchLocation);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        LoadLocation();
+        UIManager.Instance.OpenSwitchScenePanel();
     }
 }
