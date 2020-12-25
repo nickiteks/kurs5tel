@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -80,11 +81,11 @@ public class Inventory : MonoBehaviour
 
         if (count > 1 && item.id != 0)
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = count.ToString();
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = count.ToString();
         }
         else
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = "";
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
         }
     }
     /// <summary>
@@ -100,11 +101,11 @@ public class Inventory : MonoBehaviour
 
         if (invItem.count > 1 && invItem.id != 0)
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = invItem.count.ToString();
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = invItem.count.ToString();
         }
         else
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = "";
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
         }
     }
     /// <summary>
@@ -145,11 +146,11 @@ public class Inventory : MonoBehaviour
         {
             if (items[i].id != 0)
             {
-                items[i].itemGameObject.GetComponentInChildren<Text>().text = items[i].count.ToString();
+                items[i].itemGameObject.GetComponentInChildren<TMP_Text>().text = items[i].count.ToString();
             }
             else
             {
-                items[i].itemGameObject.GetComponentInChildren<Text>().text = "";
+                items[i].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
             }
             items[i].itemGameObject.GetComponent<Image>().sprite = data.items[items[i].id].img;
         }
