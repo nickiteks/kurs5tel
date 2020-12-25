@@ -9,7 +9,6 @@ public class FollowScript : MonoBehaviour
     /// Точки за которыми нужно следовать
     /// </summary>
     public List<FollowPoint> followPoints = new List<FollowPoint>();
-    public GameObject gameObject1;
     /// <summary>
     /// Ссылка на игрока
     /// </summary>
@@ -22,10 +21,20 @@ public class FollowScript : MonoBehaviour
     /// </summary>
     public FollowPoint CurrentPoint { get; set; }
 
+    [SerializeField]
+    private float distanceBtwPlayer;
+    public float DistanceBtwPlayer { get { return distanceBtwPlayer; } }
     /// <summary>
     /// Проверка паузы у currentFollowPoint
     /// </summary>
     private bool canMove = false;
+
+    private float distance;
+
+    private void Start()
+    {
+        //InvokeRepeating(nameof(ControlDistance), 1, 2);
+    }
 
     private void FixedUpdate()
     {
@@ -37,12 +46,12 @@ public class FollowScript : MonoBehaviour
 
     private void FollowPlayer()
     {
-        SynchronizationStopingWithPlayer();
-        if (canMove && Vector2.Distance(transform.position, followPoints[0].Position) == 0)
-        {
-            //transform.position = followPoints[0].Position;
-            followPoints.RemoveAt(0);
+        if (!StopingWithPlayer()) return;
+        ControlDistance();
 
+        if (canMove && Vector2.Distance(transform.position, followPoints[0].Position) <= 0.1)
+        {
+            followPoints.RemoveAt(0);
             CurrentPoint = followPoints[0];
         }
     }
@@ -83,17 +92,41 @@ public class FollowScript : MonoBehaviour
     /// <summary>
     /// Синхронизация остановки с игроком
     /// </summary>
-    private void SynchronizationStopingWithPlayer()
+    private bool StopingWithPlayer()
     {
         if (playerController.CurrentMoveDirection == MoveDirection.None || followPoints.Count == 0)
         {
             canMove = false;
             CurrentPoint = null;
+            return false;
         }
         else
         {
             canMove = true;
             CurrentPoint = followPoints[0];
+            return true;
+        }
+    }
+
+    private void ControlDistance()
+    {
+        if (!canMove) return;
+
+        distance = Vector2.Distance(transform.position, followPoints[0].Position);
+        for (int i = 0; i < followPoints.Count - 2; i++)
+        {
+            distance += Vector2.Distance(followPoints[i].Position, followPoints[i + 1].Position);
+        }
+        distance += Vector2.Distance(followPoints[followPoints.Count - 1].Position, playerController.transform.position);
+
+        if (distance > distanceBtwPlayer + 0.2)
+        {
+            transform.position = followPoints[0].Position;
+        } 
+        else if (distance < distanceBtwPlayer - 0.2)
+        {
+            canMove = false;
+            CurrentPoint = null;
         }
     }
 }
