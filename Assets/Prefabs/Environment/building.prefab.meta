@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Canvas.prefab.meta
+guid: 20a30f24efdab514ebec3f61315a7aa6
+=======
 guid: 9b5158f483559d44ba1ab19b3566ff18
+>>>>>>> some adds:Assets/Prefabs/Environment/building.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

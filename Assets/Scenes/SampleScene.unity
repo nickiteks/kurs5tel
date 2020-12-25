@@ -105777,7 +105777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79e6bf50d46d5c449a8fe9bbe31a213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameSwitchLocation: se
+  nameSwitchLocation: FightScene
 --- !u!1 &1660025514
 GameObject:
   m_ObjectHideFlags: 0

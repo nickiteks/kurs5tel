@@ -1,9 +1,6 @@
 ﻿using System;
 
-public static class SceneNotFoundException 
+public class SceneNotFoundException : Exception
 {
-    public static string SceneNotFound(string name)
-    {
-        return "Сцена с таким именем не найдена " + name;
-    }
+    
 }
