@@ -14,6 +14,10 @@ public class StatsInventoryManager : MonoBehaviour
     private BaseStatsScript StatsContainer;
     public DatabaseInventory database;
     public MovingObgectManager movingObgect;
+    ExceptionsInventory exceptionsInventory;
+    /// <summary>
+    /// Изменение харрактеристик после перемещения предмета
+    /// </summary>
     public void CellScanner()
     {
         int itemIndex = int.Parse(es.currentSelectedGameObject.name);
@@ -30,23 +34,16 @@ public class StatsInventoryManager : MonoBehaviour
             StatsContainer.ManaMax -= database.items[movingObgect.ItemInventory.id].mana;
 
         }
-        if (StatsContainer.Armor < 0)
+        if (StatsContainer.Armor < 0 || StatsContainer.Damage < 0 || StatsContainer.ManaMax < 0)
         {
-            StatsContainer.Armor = 0;
-        }
-        if (StatsContainer.Damage < 0)
-        {
-            StatsContainer.Damage = 0;
-        }
-        if (StatsContainer.ManaMax < 0)
-        {
-            StatsContainer.Damage = 0;
+            exceptionsInventory.ZeroStatException();
         }
     }
+    /// <summary>
+    /// проверка харрактеристик инвенторя
+    /// </summary>
     public void InventiryScanner()
     {
-        //StatsContainer.Armor = 0;
-        //StatsContainer.Damage = 0;
         foreach (var item in inventory.items)
         {
             StatsContainer.Armor += database.items[item.id].armor;
