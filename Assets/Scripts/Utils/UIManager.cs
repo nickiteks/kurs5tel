@@ -6,6 +6,18 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
     private Inventory playerInventory;
+    [SerializeField]
+    private RectTransform switchScenePanel;
+
+    public void OpenSwitchScenePanel()
+    {
+        switchScenePanel.gameObject.SetActive(true);
+    }
+
+    public void CloseSwitchScenePanel()
+    {
+        switchScenePanel.gameObject.SetActive(false);
+    }
 
     public void OpenPlayerInventory()
     {
