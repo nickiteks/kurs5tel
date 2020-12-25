@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 
 public class BotController : AbstractController
 {
-    protected FollowScript followScript;
+    protected IFollow followScript;
 
     private void Awake()
     {
-        followScript = GetComponent<FollowScript>();
+        followScript = GetComponent<IFollow>();
         movementScript = GetComponent<MovementScript>();
         animator = GetComponent<Animator>();
     }
