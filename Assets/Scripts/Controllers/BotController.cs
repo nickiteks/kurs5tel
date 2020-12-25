@@ -1,31 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BotController : AbstractController
 {
+    protected IFollow followScript;
+
     private void Awake()
     {
-        // TODO: дописать метод инициализации
-    }
-
-    private void Update()
-    {
-        // TODO: дописать Update
+        followScript = GetComponent<IFollow>();
+        movementScript = GetComponent<MovementScript>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        // TODO: дописать Fixed Update
-    }
-
-    protected override void MovementAnimationLogic()
-    {
-        throw new System.NotImplementedException();
+        if (followScript.CurrentPoint != null)
+        {
+            MovementLogic();
+            MovementAnimationLogic(followScript.CurrentPoint.NextMoveDirection);
+        }
+        else
+        {
+            MovementAnimationLogic(MoveDirection.None);
+        }
     }
 
     protected override void MovementLogic()
     {
-        throw new System.NotImplementedException();
+        movementScript.Move(followScript.CurrentPoint.Position);
     }
 }

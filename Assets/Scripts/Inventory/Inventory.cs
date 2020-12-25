@@ -19,13 +19,9 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private int maxCount;
 
-    [SerializeField]
-    private Camera cam;
-    [SerializeField]
     private EventSystem es;
 
-    [SerializeField]
-    private int currentID;
+    private int currentID = -1;
 
     [SerializeField]
     private RectTransform movingObject;
@@ -33,13 +29,15 @@ public class Inventory : MonoBehaviour
     private Vector3 offset;
 
     [SerializeField]
-    private GameObject backGround;
+    private Canvas canvas;
 
     [SerializeField]
     private int cellSize;
 
     private MovingObgectManager movingObgectManager;
 
+    ExceptionsInventory ExceptionsInventory;
+    ValidationInventory validationInventory;
     public void Awake()
     {
         movingObgectManager = MovingObgectManager.Instance;
@@ -53,7 +51,7 @@ public class Inventory : MonoBehaviour
         {
             AddItem(i, data.items[Random.Range(0,6)], Random.Range(1, cellSize));
         }
-
+        es = FindObjectOfType<EventSystem>();
         UpdateInventiory();
     }
     public void Update()
@@ -62,7 +60,6 @@ public class Inventory : MonoBehaviour
         {
             MoveObject();
         }
-       
         if (!IsMouseOverUI() && Input.GetKeyDown(KeyCode.Mouse0))
         {
             DeleteItem();
@@ -121,8 +118,10 @@ public class Inventory : MonoBehaviour
 
 
             newItem.name = i.ToString();
-            ItemInventory itemInventory = new ItemInventory();
-            itemInventory.itemGameObject = newItem;
+            ItemInventory itemInventory = new ItemInventory
+            {
+                itemGameObject = newItem
+            };
 
             RectTransform rt = newItem.GetComponent<RectTransform>();
             rt.localPosition = new Vector3(0, 0, 0);
@@ -154,6 +153,10 @@ public class Inventory : MonoBehaviour
             }
             items[i].itemGameObject.GetComponent<Image>().sprite = data.items[items[i].id].img;
         }
+        if(items.Count > maxCount)
+        {
+            ExceptionsInventory.OverFlowException();
+        }
     }
     /// <summary>
     /// выбор обьекта в инвентаре
@@ -176,7 +179,7 @@ public class Inventory : MonoBehaviour
         {
             if (movingObgectManager.ItemInventory.id != 0)
             {
-                ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
+                    ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
 
                 if (movingObgectManager.ItemInventory.id != itemInventory.id)
                 {
@@ -210,20 +213,22 @@ public class Inventory : MonoBehaviour
             movingObgectManager.ItemInventory = null;
             movingObject.gameObject.SetActive(false);
         }
+
+        UpdateInventiory();
     }
 
     private void MoveObject()
     {
-        Vector3 pos = Input.mousePosition + offset;
-        pos.z = InventoryMainObject.GetComponent<RectTransform>().position.z;
-        movingObject.position = cam.ScreenToWorldPoint(pos);
+        movingObject.position = Input.mousePosition + offset;
     }
     private ItemInventory CopyInventoryItem(ItemInventory old)
     {
-        ItemInventory New = new ItemInventory();
-        New.id = old.id;
-        New.itemGameObject = old.itemGameObject;
-        New.count = old.count;
+        ItemInventory New = new ItemInventory
+        {
+            id = old.id,
+            itemGameObject = old.itemGameObject,
+            count = old.count
+        };
 
         return New;
     }
@@ -250,12 +255,14 @@ public class Inventory : MonoBehaviour
         return EventSystem.current.IsPointerOverGameObject();
     }
 
-    private void OpenInventory()
+    public void OpenInventory()
     {
-            backGround.SetActive(!backGround.activeSelf);
-            if (backGround.activeSelf)
-            {
-                UpdateInventiory();
-            }
+        canvas.enabled = true;
+        UpdateInventiory();
+    }
+
+    public void CloseInventory() 
+    {
+        canvas.enabled = false;
     }
 }

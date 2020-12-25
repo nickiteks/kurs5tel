@@ -14,11 +14,22 @@ public class PlayerController : AbstractController
     private List<MoveDirection> queueMovingButton;
 
     /// <summary>
+    /// Текущее направление игрока
+    /// </summary>
+    public MoveDirection CurrentMoveDirection { get { return queueMovingButton[0]; } }
+
+    /// <summary>
+    /// Задаёт направление для преследователей
+    /// </summary>
+    private MainPlayerFollowScript mainPlayerFollowScript;
+
+    /// <summary>
     /// Вкл и Выкл режима взаимодействия с объектами в мире
     /// </summary>
+    private bool isInteractionWithWorld;
     public bool IsInteractionWithWorld 
     {
-        get => IsInteractionWithWorld;
+        get { return isInteractionWithWorld; }
         set
         {
             if (value)
@@ -31,13 +42,18 @@ public class PlayerController : AbstractController
                 movementScript.enabled = true;
                 animator.enabled = true;
             }
+
+            isInteractionWithWorld = value;
         }
     }
+
+    private Vector2 distance = new Vector2(0, 0);
 
     private void Awake()
     {
         movementScript = GetComponent<MovementScript>();
         animator = GetComponent<Animator>();
+        mainPlayerFollowScript = GetComponent<MainPlayerFollowScript>();
 
         inputManager = InputManager.Instance;
         queueMovingButton = new List<MoveDirection>() { MoveDirection.None };
@@ -48,13 +64,17 @@ public class PlayerController : AbstractController
         if (!IsInteractionWithWorld)
         {
             DownUpButtonLogic();
-            MovementAnimationLogic();
+            MovementAnimationLogic(queueMovingButton[0]);
         }
     }
 
     private void FixedUpdate()
     {
-        MovementLogic();
+        if (!IsInteractionWithWorld)
+        {
+            MovementLogic();
+            ControlSwitchMoveDirection();
+        }
     }
 
     protected override void MovementLogic()
@@ -67,10 +87,28 @@ public class PlayerController : AbstractController
     /// </summary>
     private void DownUpButtonLogic()
     {
-        if (Input.GetKeyDown(inputManager.moveRight)) queueMovingButton.Insert(0, MoveDirection.Right);
-        if (Input.GetKeyDown(inputManager.moveLeft)) queueMovingButton.Insert(0, MoveDirection.Left);
-        if (Input.GetKeyDown(inputManager.moveUp)) queueMovingButton.Insert(0, MoveDirection.Up);
-        if (Input.GetKeyDown(inputManager.moveDown)) queueMovingButton.Insert(0, MoveDirection.Down);
+        MoveDirection direction = MoveDirection.None;
+        if (Input.GetKeyDown(inputManager.moveRight)) direction = MoveDirection.Right;
+        if (Input.GetKeyDown(inputManager.moveLeft)) direction = MoveDirection.Left;
+        if (Input.GetKeyDown(inputManager.moveUp)) direction = MoveDirection.Up;
+        if (Input.GetKeyDown(inputManager.moveDown)) direction = MoveDirection.Down;
+
+        if (direction != MoveDirection.None)
+        {
+            if (queueMovingButton[0] == MoveDirection.None)
+            {
+                queueMovingButton.Insert(0, direction);
+                mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
+            }
+            else
+            {
+                mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
+                queueMovingButton.Insert(0, direction);
+            }
+
+            distance = transform.position;
+        }
+        
 
         if (Input.GetKeyUp(inputManager.moveRight)) queueMovingButton.Remove(MoveDirection.Right);
         if (Input.GetKeyUp(inputManager.moveLeft)) queueMovingButton.Remove(MoveDirection.Left);
@@ -78,34 +116,21 @@ public class PlayerController : AbstractController
         if (Input.GetKeyUp(inputManager.moveDown)) queueMovingButton.Remove(MoveDirection.Down);
     }
 
-    protected override void MovementAnimationLogic()
+    /// <summary>
+    /// Отлавливание смены направления
+    /// </summary>
+    private void ControlSwitchMoveDirection()
     {
-        if (animator)
+        if (Vector2.Distance(transform.position, distance) >= mainPlayerFollowScript.DistanceCreatePoint && queueMovingButton[0] != MoveDirection.None)
         {
-            switch (queueMovingButton[0])
-            {
-                case MoveDirection.Up:
-                    animator.SetBool("BackRun", true);
-                    animator.SetBool("SideRun", false);
-                    animator.SetBool("FrontRun", false);
-                    break;
-                case MoveDirection.Down:
-                    animator.SetBool("BackRun", false);
-                    animator.SetBool("SideRun", false);
-                    animator.SetBool("FrontRun", true);
-                    break;
-                case MoveDirection.Right:
-                case MoveDirection.Left:
-                    animator.SetBool("BackRun", false);
-                    animator.SetBool("SideRun", true);
-                    animator.SetBool("FrontRun", false);
-                    break;
-                case MoveDirection.None:
-                    animator.SetBool("BackRun", false);
-                    animator.SetBool("SideRun", false);
-                    animator.SetBool("FrontRun", false);
-                    break;
-            }
-        }
+            mainPlayerFollowScript.CreateFollowPoint(new FollowPoint(0, new Vector2(transform.position.x, transform.position.y), queueMovingButton[0]));
+            distance = transform.position;
+        }  
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        queueMovingButton.Clear();
+        queueMovingButton.Add(MoveDirection.None);
     }
 }
