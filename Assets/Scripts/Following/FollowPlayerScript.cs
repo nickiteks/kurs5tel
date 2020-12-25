@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FollowScript : MonoBehaviour
+public class FollowPlayerScript : MonoBehaviour, IFollow
 {
     /// <summary>
     /// Точки за которыми нужно следовать
@@ -30,11 +30,6 @@ public class FollowScript : MonoBehaviour
     private bool canMove = false;
 
     private float distance;
-
-    private void Start()
-    {
-        //InvokeRepeating(nameof(ControlDistance), 1, 2);
-    }
 
     private void FixedUpdate()
     {
