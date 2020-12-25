@@ -36,6 +36,8 @@ public class Inventory : MonoBehaviour
 
     private MovingObgectManager movingObgectManager;
 
+    ExceptionsInventory ExceptionsInventory;
+    ValidationInventory validationInventory;
     public void Awake()
     {
         movingObgectManager = MovingObgectManager.Instance;
@@ -150,6 +152,10 @@ public class Inventory : MonoBehaviour
                 items[i].itemGameObject.GetComponentInChildren<Text>().text = "";
             }
             items[i].itemGameObject.GetComponent<Image>().sprite = data.items[items[i].id].img;
+        }
+        if(items.Count > maxCount)
+        {
+            ExceptionsInventory.OverFlowException();
         }
     }
     /// <summary>
