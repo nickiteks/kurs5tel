@@ -76239,6 +76239,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ed25faab34f9f42aca87bc34962de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &761578178 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3728927876367346300, guid: 361d7cf9489f2a94b8efe4a978e63f92,
+    type: 3}
+  m_PrefabInstance: {fileID: 842047244}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee12ffc2c19b0d4aba08798cc005c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &766835930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6750945097808314249, guid: 9b5158f483559d44ba1ab19b3566ff18,
@@ -87216,6 +87228,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 935510854975253942, guid: 20a30f24efdab514ebec3f61315a7aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 761578178}
+    - target: {fileID: 935510854975253942, guid: 20a30f24efdab514ebec3f61315a7aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClosePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 935510855688513121, guid: 20a30f24efdab514ebec3f61315a7aa6,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 548842064}
     - target: {fileID: 935510855688513122, guid: 20a30f24efdab514ebec3f61315a7aa6,
         type: 3}
       propertyPath: es
@@ -87236,6 +87263,11 @@ PrefabInstance:
       propertyPath: movingObgect
       value: 
       objectReference: {fileID: 742286428}
+    - target: {fileID: 935510856303541320, guid: 20a30f24efdab514ebec3f61315a7aa6,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 548842064}
     - target: {fileID: 935510856303541321, guid: 20a30f24efdab514ebec3f61315a7aa6,
         type: 3}
       propertyPath: es
@@ -87256,6 +87288,11 @@ PrefabInstance:
       propertyPath: movingObgect
       value: 
       objectReference: {fileID: 742286428}
+    - target: {fileID: 935510856744231911, guid: 20a30f24efdab514ebec3f61315a7aa6,
+        type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 548842064}
     - target: {fileID: 935510856744231912, guid: 20a30f24efdab514ebec3f61315a7aa6,
         type: 3}
       propertyPath: es
@@ -87276,6 +87313,16 @@ PrefabInstance:
       propertyPath: movingObgect
       value: 
       objectReference: {fileID: 742286428}
+    - target: {fileID: 935510856928931438, guid: 20a30f24efdab514ebec3f61315a7aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 88452632}
+    - target: {fileID: 935510856928931438, guid: 20a30f24efdab514ebec3f61315a7aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLocation
+      objectReference: {fileID: 0}
     - target: {fileID: 6161563319397841973, guid: 20a30f24efdab514ebec3f61315a7aa6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
