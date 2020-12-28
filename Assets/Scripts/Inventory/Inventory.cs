@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -36,8 +37,12 @@ public class Inventory : MonoBehaviour
 
     private MovingObgectManager movingObgectManager;
 
+    ExceptionsInventory ExceptionsInventory;
+    ValidationInventory validationInventory;
+    private Logger logger;
     public void Awake()
     {
+        logger = new Logger("InventoryLog");
         movingObgectManager = MovingObgectManager.Instance;
         movingObgectManager.ItemInventory = null;
         if (items.Count == 0)
@@ -47,7 +52,7 @@ public class Inventory : MonoBehaviour
         
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0,2)], Random.Range(1, cellSize));
+            AddItem(i, data.items[Random.Range(0,6)], Random.Range(1, cellSize));
         }
         es = FindObjectOfType<EventSystem>();
         UpdateInventiory();
@@ -78,12 +83,13 @@ public class Inventory : MonoBehaviour
 
         if (count > 1 && item.id != 0)
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = count.ToString();
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = count.ToString();
         }
         else
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = "";
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
         }
+        logger.Log("Добавлен предмет " + item.id);
     }
     /// <summary>
     /// добавление уже существующего ItemInventory  в инвентарь
@@ -98,11 +104,11 @@ public class Inventory : MonoBehaviour
 
         if (invItem.count > 1 && invItem.id != 0)
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = invItem.count.ToString();
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = invItem.count.ToString();
         }
         else
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = "";
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
         }
     }
     /// <summary>
@@ -143,13 +149,17 @@ public class Inventory : MonoBehaviour
         {
             if (items[i].id != 0)
             {
-                items[i].itemGameObject.GetComponentInChildren<Text>().text = items[i].count.ToString();
+                items[i].itemGameObject.GetComponentInChildren<TMP_Text>().text = items[i].count.ToString();
             }
             else
             {
-                items[i].itemGameObject.GetComponentInChildren<Text>().text = "";
+                items[i].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
             }
             items[i].itemGameObject.GetComponent<Image>().sprite = data.items[items[i].id].img;
+        }
+        if(items.Count > maxCount)
+        {
+            ExceptionsInventory.OverFlowException();
         }
     }
     /// <summary>
@@ -173,7 +183,7 @@ public class Inventory : MonoBehaviour
         {
             if (movingObgectManager.ItemInventory.id != 0)
             {
-                ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
+                    ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
 
                 if (movingObgectManager.ItemInventory.id != itemInventory.id)
                 {
@@ -199,7 +209,7 @@ public class Inventory : MonoBehaviour
                     }
                     if (itemInventory.id != 0)
                     {
-                        itemInventory.itemGameObject.GetComponentInChildren<Text>().text = itemInventory.count.ToString();
+                        itemInventory.itemGameObject.GetComponentInChildren<TMP_Text>().text = itemInventory.count.ToString();
                     }
                 }
             }
@@ -207,6 +217,8 @@ public class Inventory : MonoBehaviour
             movingObgectManager.ItemInventory = null;
             movingObject.gameObject.SetActive(false);
         }
+
+        UpdateInventiory();
     }
 
     private void MoveObject()
