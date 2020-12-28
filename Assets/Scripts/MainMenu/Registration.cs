@@ -9,12 +9,13 @@ public class Registration : MonoBehaviour
 
     public IEnumerator Register()
     {
-        string url = APIConfig.url();
+        /*//string url = APIConfig.url();
         using (WWW www = new WWW(url))
         {
             yield return www;
             Renderer renderer = GetComponent<Renderer>();
             renderer.material.mainTexture = www.texture;
-        }
+        }*/
+        return null;
     }
 }
