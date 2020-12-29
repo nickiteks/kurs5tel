@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class BaseStatsScript : MonoBehaviour
 {
     [SerializeField]
@@ -16,6 +17,7 @@ public class BaseStatsScript : MonoBehaviour
     private int armor;
     [SerializeField]
     private int damage;
+    public int id { get; set; }
 
     public int Mana
     {
