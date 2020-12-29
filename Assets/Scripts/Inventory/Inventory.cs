@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 {
     public DatabaseInventory data;
 
-    public List<ItemInventory> items = new List<ItemInventory>();
+    public List<ItemInventory> items;
 
     [SerializeField]
     private GameObject gameObjectShow;
@@ -42,6 +42,7 @@ public class Inventory : MonoBehaviour
     public Logger logger;
     public void Awake()
     {
+        items = new List<ItemInventory>(maxCount);
         logger = new Logger("InventoryLog");
         movingObgectManager = MovingObgectManager.Instance;
         movingObgectManager.ItemInventory = null;
