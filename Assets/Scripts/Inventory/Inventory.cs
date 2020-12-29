@@ -18,9 +18,9 @@ public class Inventory : MonoBehaviour
     private GameObject InventoryMainObject;
 
     [SerializeField]
-    private int maxCount;
+    public int maxCount;
 
-    private EventSystem es;
+    public EventSystem es;
 
     private int currentID = -1;
 
@@ -33,13 +33,13 @@ public class Inventory : MonoBehaviour
     private Canvas canvas;
 
     [SerializeField]
-    private int cellSize;
+    public int cellSize;
 
-    private MovingObgectManager movingObgectManager;
+    public MovingObgectManager movingObgectManager;
 
     ExceptionsInventory ExceptionsInventory;
     ValidationInventory validationInventory;
-    private Logger logger;
+    public Logger logger;
     public void Awake()
     {
         logger = new Logger("InventoryLog");
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
         
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0,6)], Random.Range(1, cellSize));
+            AddItem(i, data.items[0], Random.Range(1, cellSize));
         }
         es = FindObjectOfType<EventSystem>();
         UpdateInventiory();
@@ -143,7 +143,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// обновление данных
     /// </summary>
-    private void UpdateInventiory()
+    public void UpdateInventiory()
     {
         for (int i = 0; i < maxCount; i++)
         {
