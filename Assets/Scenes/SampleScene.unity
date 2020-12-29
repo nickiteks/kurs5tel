@@ -856,7 +856,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyInventory
       value: 
-      objectReference: {fileID: 883966588}
+      objectReference: {fileID: 1099337162}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdf5a48a394b001409eaae401ea93808, type: 3}
 --- !u!1 &307257340
@@ -21530,18 +21530,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eee12ffc2c19b0d4aba08798cc005c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &883966588 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3728927876246294062, guid: 361d7cf9489f2a94b8efe4a978e63f92,
-    type: 3}
-  m_PrefabInstance: {fileID: 3728927876570287186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04731cd4dc9513c429a0af1f562bfcd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &884965065 stripped
@@ -93660,6 +93648,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a13da97bf57558549a2ecdf0966de1e7, type: 3}
+--- !u!1 &1099337160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3728927876246294056, guid: 361d7cf9489f2a94b8efe4a978e63f92,
+    type: 3}
+  m_PrefabInstance: {fileID: 3728927876570287186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1099337162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099337160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b5aba331aca744fa4b1d10cd2d522a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 1925642542}
+  items: []
+  gameObjectShow: {fileID: 3751815808589702237, guid: ded4608b644078f4dbc7a5769b104a6d,
+    type: 3}
+  InventoryMainObject: {fileID: 1070367964}
+  maxCount: 30
+  es: {fileID: 0}
+  movingObject: {fileID: 260843365}
+  offset: {x: 1, y: -1, z: 0}
+  canvas: {fileID: 972106521}
+  cellSize: 10
+  movingObgectManager: {fileID: 0}
 --- !u!4 &1100686456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952605751218769700, guid: 0369a8d264193ec4bb9279691b005a24,
@@ -106012,21 +106030,6 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1601888833}
-    - target: {fileID: 3728927876246294062, guid: 361d7cf9489f2a94b8efe4a978e63f92,
-        type: 3}
-      propertyPath: InventoryMainObject
-      value: 
-      objectReference: {fileID: 1070367964}
-    - target: {fileID: 3728927876246294062, guid: 361d7cf9489f2a94b8efe4a978e63f92,
-        type: 3}
-      propertyPath: movingObject
-      value: 
-      objectReference: {fileID: 260843365}
-    - target: {fileID: 3728927876246294062, guid: 361d7cf9489f2a94b8efe4a978e63f92,
-        type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 972106521}
     - target: {fileID: 3728927876367346300, guid: 361d7cf9489f2a94b8efe4a978e63f92,
         type: 3}
       propertyPath: switchScenePanel
