@@ -16,13 +16,10 @@ public class APIClient : Singleton<APIClient>
     {
         Connect();
     }
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
+
     public static void Connect()
     {
-        client.BaseAddress = new Uri("https://localhost:5001/");
+        client.BaseAddress = new Uri("https://localhost:5001//");
         client.DefaultRequestHeaders.Accept.Clear();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
@@ -44,10 +41,10 @@ public class APIClient : Singleton<APIClient>
 
     public static void PostRequest<T>(string requestUrl, T model)
     {
-        Debug.Log( client.BaseAddress+requestUrl);
         var json = JsonConvert.SerializeObject(model);
         var data = new StringContent(json, Encoding.UTF8, "application/json");
         var response = client.PostAsync(requestUrl, data);
+        response = client.PostAsync("https://localhost:5001/api/Client/Register", data);
         var result = response.Result.Content.ReadAsStringAsync().Result;
         if (!response.Result.IsSuccessStatusCode)
         {
