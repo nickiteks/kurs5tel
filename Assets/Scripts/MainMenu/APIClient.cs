@@ -16,7 +16,10 @@ public class APIClient : Singleton<APIClient>
     {
         Connect();
     }
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     public static void Connect()
     {
         client.BaseAddress = new Uri("https://localhost:5001/");
