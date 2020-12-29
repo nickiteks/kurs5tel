@@ -43,6 +43,11 @@ public class LoadSaveInventory : MonoBehaviour
         model.Persons = SavePersons();
         model.InventoryPersons = SaveInventoryPersons();
         model.InventoryUsers = SaveInventoryUser();
+        SentSave(model);
+    }
+
+    private void SentSave(ModelSave model)
+    {
     }
 
     private List<ItemUser> SaveInventoryUser()
