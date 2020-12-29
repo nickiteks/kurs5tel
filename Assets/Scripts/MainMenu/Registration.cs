@@ -1,21 +1,24 @@
-﻿using System.Collections;
+﻿using Database;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Registration : MonoBehaviour
 {
-    private readonly string APINameFunction = "Register";
-    private readonly string APINameController = "Client";
-
-    public IEnumerator Register()
+    [SerializeField]
+    private TMP_Text Login;
+    [SerializeField]
+    private TMP_Text Password;
+    [SerializeField]
+    private TMP_Text NickName;
+    public void ButtonRegister_Click()
     {
-        /*//string url = APIConfig.url();
-        using (WWW www = new WWW(url))
+        APIClient.PostRequest("api/Client/Register", new User
         {
-            yield return www;
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material.mainTexture = www.texture;
-        }*/
-        return null;
+            Login = Login.text,
+            Password = Password.text,
+            Nickname = NickName.text,
+        });
     }
 }
