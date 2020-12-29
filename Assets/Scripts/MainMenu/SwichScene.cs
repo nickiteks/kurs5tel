@@ -8,6 +8,5 @@ public class SwichScene : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene("SampleScene");
-
     }
 }
