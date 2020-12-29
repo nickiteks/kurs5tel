@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Camera/CameraFollowing.cs.meta
+guid: afdd2f2b846a6b243ad571bcf5222973
+=======
 guid: 04b5aba331aca744fa4b1d10cd2d522a
+>>>>>>> Генерация отдельных предметов для сумки  и небольшой фикс мейн сцены:Assets/Scripts/Inventory/ChestInventory.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
