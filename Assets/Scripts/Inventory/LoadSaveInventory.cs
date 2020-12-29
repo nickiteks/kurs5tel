@@ -17,13 +17,13 @@ public class LoadSaveInventory : MonoBehaviour
 
     private void Awake()
     {
-        if(Client.Instance.isNewGame)
-        {
-            CreateNewInventory();
-        } else
-        {
-            LoadFromDatabaseInventory();
-        }
+        //if(Client.Instance.isNewGame)
+        //{
+        //    CreateNewInventory();
+        //} else
+        //{
+        //    LoadFromDatabaseInventory();
+        //}
     }
 
     private void LoadFromDatabaseInventory()
