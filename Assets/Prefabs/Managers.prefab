@@ -49,10 +49,12 @@ MonoBehaviour:
     type: 3}
   InventoryMainObject: {fileID: 0}
   maxCount: 25
+  es: {fileID: 0}
   movingObject: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   canvas: {fileID: 0}
   cellSize: 10
+  movingObgectManager: {fileID: 0}
 --- !u!1 &3728927876246294056
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +64,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3728927876246294057}
-  - component: {fileID: 3728927876246294062}
   m_Layer: 0
   m_Name: EnemyInventory
   m_TagString: Untagged
@@ -84,28 +85,6 @@ Transform:
   m_Father: {fileID: 3728927877301879223}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3728927876246294062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3728927876246294056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04731cd4dc9513c429a0af1f562bfcd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 3728927877421397372}
-  items: []
-  gameObjectShow: {fileID: 3751815808589702237, guid: ded4608b644078f4dbc7a5769b104a6d,
-    type: 3}
-  InventoryMainObject: {fileID: 0}
-  maxCount: 30
-  movingObject: {fileID: 0}
-  offset: {x: 1, y: -1, z: 0}
-  canvas: {fileID: 0}
-  cellSize: 10
 --- !u!1 &3728927876367346302
 GameObject:
   m_ObjectHideFlags: 0
