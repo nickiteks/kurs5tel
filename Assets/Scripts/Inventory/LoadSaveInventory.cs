@@ -28,13 +28,13 @@ public class LoadSaveInventory : MonoBehaviour
         }
     }
 
-    private void LoadFromDatabaseInventory()
+    public void LoadFromDatabaseInventory()
     {
         ModelSave model = APIClient.GetRequest<ModelSave>("/api/Storage/Load?userId="+Client.Instance.user.Id);
         ConvertModelSave(model);
     }
 
-    private void ConvertModelSave (ModelSave model)
+    private void ConvertModelSave(ModelSave model)
     {
         LoadItemsPersons(model);
         LoadItemsToInventor(model.InventoryUsers, InventoryUser);
@@ -69,6 +69,8 @@ public class LoadSaveInventory : MonoBehaviour
         }
         inventory.UpdateInventiory();
     }
+
+
 
     private void LoadItemsPersons(ModelSave model)
     {

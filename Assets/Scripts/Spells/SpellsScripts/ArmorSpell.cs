@@ -12,7 +12,7 @@ public class ArmorSpell : Spell, IUsable
     public bool useItem(Character[] target)
     {
         if ((isSoloTarget && target.Length != 1) || target.Length == 0) return false;
-        if (target.FirstOrDefault(x => x.IsEnemy != this.IsEnemy)) return false;
+        if (target.FirstOrDefault(x => x.IsEnemy != IsEnemy) == null) return false;
         //TODO: дописать как раз влияние на харрактеристики
         return true;
     }

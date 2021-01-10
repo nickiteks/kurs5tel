@@ -5,29 +5,19 @@ using UnityEngine.Events;
 
 public abstract class FightController : MonoBehaviour
 {
-    private FightState state 
+    public FightState state 
     { 
         get=>state;
-        set 
+        private set 
         {
             changeFightEvent.Invoke(value);
             state = value;
         } 
     }
     public List<Character> characters { get; set; }
-    private ChangeFightEvent changeFightEvent;
-    public void StartStep(Character character)
-    {
+    public ChangeFightEvent changeFightEvent;
 
-    }
-    protected abstract void ApplyActionToTarget(Character target);
-    
-    public void SubscribitionChangeFightStateEvent(UnityAction action)
-    {
+    public abstract void StartStep(Character character);
 
-    }
-    public void UnSubscribitionChangeFightStateEvent(UnityAction action)
-    {
-
-    }    
+    protected abstract void ApplyActionToTarget(Character target);    
 }

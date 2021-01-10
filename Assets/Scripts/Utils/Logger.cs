@@ -19,7 +19,5 @@ public class Logger
         StreamWriter sw = new StreamWriter(filePath, true);
         sw.WriteLine(info);
         sw.Close();
-
-        Debug.Log(filePath);
     }
 }
