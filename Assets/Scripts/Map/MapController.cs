@@ -9,29 +9,29 @@ public class MapController : MonoBehaviour
     private PlayerController playerController;
 
     [SerializeField]
-    private Canvas mapCanvas;
+    private RectTransform mapPanel;
+
     [SerializeField]
     private Image mapImage;
 
     private bool isMapOpen = false;
 
-    private void Start()
+    private void Awake()
     {
-        Texture2D texture = Resources.Load("MapImage/" + SceneManager.GetActiveScene().name) as Texture2D;
-        mapImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+        mapImage.sprite = Resources.Load("MapImage/" + SceneManager.GetActiveScene().name + "Map") as Sprite;
     }
 
     private void Update()
     {
         if (!isMapOpen && !playerController.IsInteractionWithWorld && Input.GetKeyDown(InputManager.Instance.map))
         {
-            UIManager.Instance.OpenCanvas(mapCanvas);
+            UIManager.Instance.OpenPanel(mapPanel);
             playerController.IsInteractionWithWorld = true;
             isMapOpen = true;
         }
         else if (isMapOpen && Input.GetKeyDown(InputManager.Instance.map))
         {
-            UIManager.Instance.CloseCanvas(mapCanvas);
+            UIManager.Instance.ClosePanel(mapPanel);
             playerController.IsInteractionWithWorld = false;
             isMapOpen = false;
         }
