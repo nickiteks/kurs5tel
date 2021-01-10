@@ -12,15 +12,8 @@ public class UIManager : Singleton<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && !isIventoryOpen)
-        {
-            OpenPlayerInventory();
-        }
-        else if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && isIventoryOpen) 
-        {
-            ClosePlayerInventory();
-        }
-            
+        if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && !isIventoryOpen) OpenPlayerInventory();
+        else if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && isIventoryOpen) ClosePlayerInventory();     
     }
     public void OpenSwitchScenePanel()
     {

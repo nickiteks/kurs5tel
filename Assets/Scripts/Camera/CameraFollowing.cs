@@ -34,7 +34,6 @@ public class CameraFollowing : MonoBehaviour
     private void Update()
     {
         float scrollValue = Input.mouseScrollDelta.y;
-        Debug.Log(scrollValue);
         if (scrollValue > 0 && camera.orthographicSize > minScrollValue)
         {
             camera.orthographicSize -= scale;
