@@ -4,11 +4,36 @@ using UnityEngine;
 
 public class UIFightManager : Singleton<UIFightManager>
 {
-    public void OpenPanel(RectTransform panel)
+    [SerializeField]
+    private RectTransform choiseingActionPanel;
+    [SerializeField]
+    private RectTransform choisingTargetPanel;
+
+    public void OpenActionPanel()
     {
 
     }
-    public void ClosePanel(RectTransform panel)
+    public void CloseActionPanel()
+    {
+
+    }
+
+    public void OpenTargetPanel()
+    {
+
+    }
+    public void CloseTargetPanel()
+    {
+
+    }
+
+
+    public void ReloadActionPanel()
+    {
+
+    }
+
+    public void CloseAllPanel()
     {
 
     }
