@@ -22,7 +22,7 @@ public class APIClient : Singleton<APIClient>
     }
     public static void Connect()
     {
-        client.BaseAddress = new Uri("https://localhost:5001/");
+        client.BaseAddress = new Uri("https://savegame.conveyor.cloud");
         client.DefaultRequestHeaders.Accept.Clear();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
