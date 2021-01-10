@@ -30,7 +30,7 @@ public class LoadSaveInventory : MonoBehaviour
 
     private void LoadFromDatabaseInventory()
     {
-        ModelSave model = APIClient.GetRequest<ModelSave>("https://localhost:5001/api/Storage/Load?userId="+Client.Instance.user.Id);
+        ModelSave model = APIClient.GetRequest<ModelSave>("/api/Storage/Load?userId="+Client.Instance.user.Id);
         ConvertModelSave(model);
     }
 
@@ -81,7 +81,6 @@ public class LoadSaveInventory : MonoBehaviour
     {
         //inventory.items.Clear();
         int i = 0;
-        var temp = data.items[i];
         foreach (var item in items)
         {
             inventory.AddItem(i, data.items[item.ItemId], item.ItemCount);
