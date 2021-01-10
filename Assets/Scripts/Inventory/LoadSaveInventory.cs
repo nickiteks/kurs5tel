@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using Database;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class LoadSaveInventory : MonoBehaviour
 {
+    public DatabaseInventory data;
     public Inventory InventoryUser;
     public Inventory InventoryWarrior;
     public Inventory InventoryMage;
@@ -15,20 +17,76 @@ public class LoadSaveInventory : MonoBehaviour
     public BaseStatsScript StatsMage;
     public BaseStatsScript StatsRogue;
 
-    private void Awake()
+    private void Start()
     {
-        //if(Client.Instance.isNewGame)
-        //{
-        //    CreateNewInventory();
-        //} else
-        //{
-        //    LoadFromDatabaseInventory();
-        //}
+        if(Client.Instance.isNewGame)
+        {
+            CreateNewInventory();
+        } else
+        {
+            LoadFromDatabaseInventory();
+        }
     }
 
     private void LoadFromDatabaseInventory()
     {
-        throw new NotImplementedException();
+        ModelSave model = APIClient.GetRequest<ModelSave>("/api/Storage/Load?userId="+Client.Instance.user.Id);
+        ConvertModelSave(model);
+    }
+
+    private void ConvertModelSave (ModelSave model)
+    {
+        LoadItemsPersons(model);
+        LoadItemsToInventor(model.InventoryUsers, InventoryUser);
+        LoadPersons(model);
+    }
+
+    private void LoadPersons(ModelSave model)
+    {
+        LoadStats(model.Persons[0], StatsWarrior);
+        LoadStats(model.Persons[1], StatsMage);
+        LoadStats(model.Persons[2], StatsRogue);
+    }
+
+    private void LoadStats(Person person, BaseStatsScript stats)
+    {
+        stats.Armor = person.Armor;
+        stats.Damage = person.Damage;
+        stats.id = person.Id.Value;
+        stats.ManaMax = person.ManaMax;
+        stats.Mana = person.Mana;
+        stats.Health = person.Health;
+    }
+
+    private void LoadItemsToInventor(List<ItemUser> items, Inventory inventory)
+    {
+        //inventory.items.Clear();
+        int i = 0;
+        foreach (var item in items)
+        {
+            inventory.AddItem(i, data.items[item.ItemId], item.ItemCount);
+            i++;
+        }
+        inventory.UpdateInventiory();
+    }
+
+    private void LoadItemsPersons(ModelSave model)
+    {
+        LoadItemsToInventor(model.InventoryPersons[0], InventoryWarrior);
+        LoadItemsToInventor(model.InventoryPersons[1], InventoryMage);
+        LoadItemsToInventor(model.InventoryPersons[2], InventoryRogue);
+    }
+
+    private void LoadItemsToInventor(List<ItemPerson> items, Inventory inventory)
+    {
+        //inventory.items.Clear();
+        int i = 0;
+        foreach (var item in items)
+        {
+            inventory.AddItem(i, data.items[item.ItemId], item.ItemCount);
+            i++;
+        }
+        inventory.UpdateInventiory();
     }
 
     private void CreateNewInventory()
@@ -43,6 +101,12 @@ public class LoadSaveInventory : MonoBehaviour
         model.Persons = SavePersons();
         model.InventoryPersons = SaveInventoryPersons();
         model.InventoryUsers = SaveInventoryUser();
+        SentSave(model);
+    }
+
+    private void SentSave(ModelSave model)
+    {
+        APIClient.PostRequest("api/Storage/Save", model);
     }
 
     private List<ItemUser> SaveInventoryUser()
