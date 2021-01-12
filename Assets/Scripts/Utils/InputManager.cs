@@ -10,4 +10,5 @@ public class InputManager : Singleton<InputManager>
     public KeyCode moveDown = KeyCode.S;
     public KeyCode inventoryOpen = KeyCode.I;
     public KeyCode interaction = KeyCode.F;
+    public KeyCode map = KeyCode.M;
 }
