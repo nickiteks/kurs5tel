@@ -46,4 +46,14 @@ public class UIManager : Singleton<UIManager>
     {
         rectTransform.gameObject.SetActive(false);
     }
+
+    public void CloseCanvas(Canvas canvas)
+    {
+        canvas.gameObject.SetActive(false);
+    }
+
+    public void OpenCanvas(Canvas canvas)
+    {
+        canvas.gameObject.SetActive(true);
+    }
 }
