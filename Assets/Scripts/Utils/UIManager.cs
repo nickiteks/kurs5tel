@@ -12,15 +12,8 @@ public class UIManager : Singleton<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && !isIventoryOpen)
-        {
-            OpenPlayerInventory();
-        }
-        else if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && isIventoryOpen) 
-        {
-            ClosePlayerInventory();
-        }
-            
+        if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && !isIventoryOpen) OpenPlayerInventory();
+        else if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && isIventoryOpen) ClosePlayerInventory();     
     }
     public void OpenSwitchScenePanel()
     {
@@ -52,5 +45,15 @@ public class UIManager : Singleton<UIManager>
     public void ClosePanel(RectTransform rectTransform)
     {
         rectTransform.gameObject.SetActive(false);
+    }
+
+    public void CloseCanvas(Canvas canvas)
+    {
+        canvas.gameObject.SetActive(false);
+    }
+
+    public void OpenCanvas(Canvas canvas)
+    {
+        canvas.gameObject.SetActive(true);
     }
 }

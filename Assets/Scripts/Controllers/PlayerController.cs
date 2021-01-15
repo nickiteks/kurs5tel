@@ -36,6 +36,8 @@ public class PlayerController : AbstractController
             {
                 movementScript.enabled = false;
                 animator.enabled = false;
+                queueMovingButton.Clear();
+                queueMovingButton.Add(MoveDirection.None);
             } 
             else
             {
@@ -72,9 +74,9 @@ public class PlayerController : AbstractController
     {
         if (!IsInteractionWithWorld)
         {
-            MovementLogic();
             ControlSwitchMoveDirection();
         }
+        MovementLogic();
     }
 
     protected override void MovementLogic()
