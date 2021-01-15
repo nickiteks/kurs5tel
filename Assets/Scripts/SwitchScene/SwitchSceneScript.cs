@@ -11,15 +11,11 @@ public class SwitchSceneScript : MonoBehaviour
     [SerializeField]
     private string nameSwitchLocation;
 
-    private void Start()
-    {
-        
-    }
-
     public void LoadLocation()
     {
         SceneManager.LoadScene(nameSwitchLocation);
-        
+        if (SwitchSceneValidation.HasScene(nameSwitchLocation)) SceneManager.LoadScene(nameSwitchLocation);
+        else Debug.Log(SceneNotFoundException.SceneNotFound(nameSwitchLocation));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

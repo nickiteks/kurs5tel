@@ -28,9 +28,7 @@ public class FollowPathScript : MonoBehaviour, IFollow
     private void FollowPath()
     {
         if (canMove && Vector2.Distance(transform.position, followPoints[0].transform.position) <= 0.1)
-        {
-            transform.position = followPoints[0].transform.position;
-
+        { 
             if (followPoints[0].DelayTime != 0)
             {
                 canMove = false;
