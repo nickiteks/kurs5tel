@@ -324,6 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5294483979092642364}
   - component: {fileID: 2955179165810622828}
+  - component: {fileID: 785399288}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -359,3 +360,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayCamera: {fileID: 0}
   mapCamera: {fileID: 0}
+--- !u!114 &785399288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709177368001597121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b2c5f1378af2348826521183593625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  mapCanvas: {fileID: 0}
+  mapImage: {fileID: 0}
