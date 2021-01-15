@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Environment/Logging/LogsEnvironment.cs.meta
+guid: 323abb94249d532499727d63e0431569
+=======
+guid: a4dd56720983e5f47ab043b68639e677
+>>>>>>> d0851b71114df30f1e984ac0f68b2573eeaf405d:Assets/Scripts/Environment/Exceptions/ExceptionsEnvironment.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

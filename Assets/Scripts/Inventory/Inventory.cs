@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
     public DatabaseInventory data;
 
-    public List<ItemInventory> items = new List<ItemInventory>();
+    public List<ItemInventory> items;
 
     [SerializeField]
     private GameObject gameObjectShow;
@@ -17,15 +18,11 @@ public class Inventory : MonoBehaviour
     private GameObject InventoryMainObject;
 
     [SerializeField]
-    private int maxCount;
+    public int maxCount;
 
-    [SerializeField]
-    private Camera cam;
-    [SerializeField]
-    private EventSystem es;
+    public EventSystem es;
 
-    [SerializeField]
-    private int currentID;
+    private int currentID = -1;
 
     [SerializeField]
     private RectTransform movingObject;
@@ -33,15 +30,20 @@ public class Inventory : MonoBehaviour
     private Vector3 offset;
 
     [SerializeField]
-    private GameObject backGround;
+    private Canvas canvas;
 
     [SerializeField]
-    private int cellSize;
+    public int cellSize;
 
-    private MovingObgectManager movingObgectManager;
+    public MovingObgectManager movingObgectManager;
 
+    ExceptionsInventory ExceptionsInventory;
+    ValidationInventory validationInventory;
+    public Logger logger;
     public void Awake()
     {
+        items = new List<ItemInventory>(maxCount);
+        logger = new Logger("InventoryLog");
         movingObgectManager = MovingObgectManager.Instance;
         movingObgectManager.ItemInventory = null;
         if (items.Count == 0)
@@ -51,9 +53,9 @@ public class Inventory : MonoBehaviour
         
         for (int i = 0; i < maxCount; i++)//тест заполнения
         {
-            AddItem(i, data.items[Random.Range(0,6)], Random.Range(1, cellSize));
+            AddItem(i, data.items[0], Random.Range(1, cellSize));
         }
-
+        es = FindObjectOfType<EventSystem>();
         UpdateInventiory();
     }
     public void Update()
@@ -61,14 +63,6 @@ public class Inventory : MonoBehaviour
         if (currentID != -1)
         {
             MoveObject();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            backGround.SetActive(!backGround.activeSelf);
-            if (backGround.activeSelf)
-            {
-                UpdateInventiory();
-            }
         }
         if (!IsMouseOverUI() && Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -90,12 +84,13 @@ public class Inventory : MonoBehaviour
 
         if (count > 1 && item.id != 0)
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = count.ToString();
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = count.ToString();
         }
         else
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = "";
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
         }
+        logger.Log("Добавлен предмет " + item.id);
     }
     /// <summary>
     /// добавление уже существующего ItemInventory  в инвентарь
@@ -110,11 +105,11 @@ public class Inventory : MonoBehaviour
 
         if (invItem.count > 1 && invItem.id != 0)
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = invItem.count.ToString();
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = invItem.count.ToString();
         }
         else
         {
-            items[id].itemGameObject.GetComponentInChildren<Text>().text = "";
+            items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
         }
     }
     /// <summary>
@@ -128,8 +123,10 @@ public class Inventory : MonoBehaviour
 
 
             newItem.name = i.ToString();
-            ItemInventory itemInventory = new ItemInventory();
-            itemInventory.itemGameObject = newItem;
+            ItemInventory itemInventory = new ItemInventory
+            {
+                itemGameObject = newItem
+            };
 
             RectTransform rt = newItem.GetComponent<RectTransform>();
             rt.localPosition = new Vector3(0, 0, 0);
@@ -147,19 +144,23 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// обновление данных
     /// </summary>
-    private void UpdateInventiory()
+    public void UpdateInventiory()
     {
         for (int i = 0; i < maxCount; i++)
         {
             if (items[i].id != 0)
             {
-                items[i].itemGameObject.GetComponentInChildren<Text>().text = items[i].count.ToString();
+                items[i].itemGameObject.GetComponentInChildren<TMP_Text>().text = items[i].count.ToString();
             }
             else
             {
-                items[i].itemGameObject.GetComponentInChildren<Text>().text = "";
+                items[i].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
             }
             items[i].itemGameObject.GetComponent<Image>().sprite = data.items[items[i].id].img;
+        }
+        if(items.Count > maxCount)
+        {
+            ExceptionsInventory.OverFlowException();
         }
     }
     /// <summary>
@@ -183,7 +184,7 @@ public class Inventory : MonoBehaviour
         {
             if (movingObgectManager.ItemInventory.id != 0)
             {
-                ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
+                    ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
 
                 if (movingObgectManager.ItemInventory.id != itemInventory.id)
                 {
@@ -209,7 +210,7 @@ public class Inventory : MonoBehaviour
                     }
                     if (itemInventory.id != 0)
                     {
-                        itemInventory.itemGameObject.GetComponentInChildren<Text>().text = itemInventory.count.ToString();
+                        itemInventory.itemGameObject.GetComponentInChildren<TMP_Text>().text = itemInventory.count.ToString();
                     }
                 }
             }
@@ -217,20 +218,22 @@ public class Inventory : MonoBehaviour
             movingObgectManager.ItemInventory = null;
             movingObject.gameObject.SetActive(false);
         }
+
+        UpdateInventiory();
     }
 
     private void MoveObject()
     {
-        Vector3 pos = Input.mousePosition + offset;
-        pos.z = InventoryMainObject.GetComponent<RectTransform>().position.z;
-        movingObject.position = cam.ScreenToWorldPoint(pos);
+        movingObject.position = Input.mousePosition + offset;
     }
     private ItemInventory CopyInventoryItem(ItemInventory old)
     {
-        ItemInventory New = new ItemInventory();
-        New.id = old.id;
-        New.itemGameObject = old.itemGameObject;
-        New.count = old.count;
+        ItemInventory New = new ItemInventory
+        {
+            id = old.id,
+            itemGameObject = old.itemGameObject,
+            count = old.count
+        };
 
         return New;
     }
@@ -255,5 +258,16 @@ public class Inventory : MonoBehaviour
     private bool IsMouseOverUI()
     {
         return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    public void OpenInventory()
+    {
+        canvas.enabled = true;
+        UpdateInventiory();
+    }
+
+    public void CloseInventory() 
+    {
+        canvas.enabled = false;
     }
 }

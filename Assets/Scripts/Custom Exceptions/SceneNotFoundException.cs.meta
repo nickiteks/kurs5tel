@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Custom Exceptions/ExceptionsInventory.cs.meta
+guid: 988f134f17aa5214ab7d05610515dfc7
+=======
+guid: 06bae454c260fa14abd45808ee82583d
+>>>>>>> ecd5ac4e92d3ec00f8b218c4774e36447f6e29fd:Assets/Scripts/Custom Exceptions/SceneNotFoundException.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

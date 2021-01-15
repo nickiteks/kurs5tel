@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 1806803267079987318}
   - component: {fileID: 1806803267079987313}
   - component: {fileID: 4478604207651550243}
-  - component: {fileID: 1188531510}
   m_Layer: 0
-  m_Name: Varrior
+  m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: -2090995387
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0f39a9205e4394ee1b6ba8269428d176, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b33a27378d882b84cbc2a6ae8b45c992, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,15 +122,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1188531510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806803267079987312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023123acd9a105548a8d131d794732a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

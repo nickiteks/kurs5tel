@@ -8,4 +8,7 @@ public class InputManager : Singleton<InputManager>
     public KeyCode moveLeft = KeyCode.A;
     public KeyCode moveUp = KeyCode.W;
     public KeyCode moveDown = KeyCode.S;
+    public KeyCode inventoryOpen = KeyCode.I;
+    public KeyCode interaction = KeyCode.F;
+    public KeyCode map = KeyCode.M;
 }

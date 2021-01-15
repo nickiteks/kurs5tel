@@ -8,11 +8,11 @@ public class FireBall : Spell, IUsable
 {
     public int impact;
     public bool isSoloTarget;
-    public bool isFriendly;
+    public bool IsEnemy;
     public bool useItem(Character[] target)
     {
         if ((isSoloTarget && target.Length != 1) || target.Length == 0) return false;
-        if (target.FirstOrDefault(x => x.isFriendly != this.isFriendly)) return false;
+        if (target.FirstOrDefault(x => x.IsEnemy != this.IsEnemy) != null) return false;
         //TODO: дописать как раз влияние на харрактеристики
         return true;
     }
