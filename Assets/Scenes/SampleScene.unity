@@ -930,7 +930,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyInventory
       value: 
-      objectReference: {fileID: 883966588}
+      objectReference: {fileID: 1931900174}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdf5a48a394b001409eaae401ea93808, type: 3}
 --- !u!1 &307257340
@@ -21772,18 +21772,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eee12ffc2c19b0d4aba08798cc005c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &883966588 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3728927876246294062, guid: 361d7cf9489f2a94b8efe4a978e63f92,
-    type: 3}
-  m_PrefabInstance: {fileID: 3728927876570287186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04731cd4dc9513c429a0af1f562bfcd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &884965065 stripped
@@ -133235,6 +133223,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0369a8d264193ec4bb9279691b005a24, type: 3}
+--- !u!1 &1931900172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3728927876246294056, guid: 361d7cf9489f2a94b8efe4a978e63f92,
+    type: 3}
+  m_PrefabInstance: {fileID: 3728927876570287186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1931900174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931900172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b5aba331aca744fa4b1d10cd2d522a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 1925642542}
+  items: []
+  gameObjectShow: {fileID: 3751815808589702237, guid: ded4608b644078f4dbc7a5769b104a6d,
+    type: 3}
+  InventoryMainObject: {fileID: 1070367964}
+  maxCount: 25
+  es: {fileID: 0}
+  movingObject: {fileID: 260843365}
+  offset: {x: 0, y: 0, z: 0}
+  canvas: {fileID: 972106521}
+  cellSize: 10
+  movingObgectManager: {fileID: 1699819933}
 --- !u!1001 &1936810459
 PrefabInstance:
   m_ObjectHideFlags: 0
