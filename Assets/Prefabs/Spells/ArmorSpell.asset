@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   name: ArmorSpell
-  img: {fileID: 0}
+  img: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
   manacost: 30
-  impact: 20
   isSoloTarget: 1
   IsEnemy: 0
+  impact: 20

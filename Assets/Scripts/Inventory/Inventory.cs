@@ -121,7 +121,6 @@ public class Inventory : MonoBehaviour
         {
             GameObject newItem = Instantiate(gameObjectShow, InventoryMainObject.transform) as GameObject;
 
-
             newItem.name = i.ToString();
             ItemInventory itemInventory = new ItemInventory
             {

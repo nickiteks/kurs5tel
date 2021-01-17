@@ -10,7 +10,7 @@ public class Apple : Item, IUsable
     public bool isSoloTarget;
     public bool IsEnemy;
 
-    public bool useItem(Character[] target)
+    public bool Use(Character[] target)
     {
         if((isSoloTarget && target.Length != 1) || target.Length == 0) return false;
         if (target.FirstOrDefault(x => x.IsEnemy != IsEnemy) == null) return false;
