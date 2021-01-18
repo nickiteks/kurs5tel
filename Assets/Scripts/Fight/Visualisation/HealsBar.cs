@@ -12,6 +12,6 @@ public class HealsBar : MonoBehaviour
 
     private void Update()
     {
-        healsImage.fillAmount = (baseStats.Health * 100) / baseStats.MaxHelth;
+        healsImage.fillAmount = (float)baseStats.Health / (float)baseStats.MaxHelth;
     }
 }

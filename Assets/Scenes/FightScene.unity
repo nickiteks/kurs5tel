@@ -442,6 +442,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 981495610}
     m_Modifications:
+    - target: {fileID: 954957627060851669, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 954957627060851669, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954957627060851669, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954957627060851669, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4456583808377505911, guid: 592ad20ad34910144a488e07eeb093a7,
         type: 3}
       propertyPath: baseStats
@@ -766,6 +786,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 305604434}
     m_Modifications:
+    - target: {fileID: 954957627060851669, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954957627060851669, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954957627060851669, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3784052748227063232, guid: 592ad20ad34910144a488e07eeb093a7,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4456583808377505911, guid: 592ad20ad34910144a488e07eeb093a7,
         type: 3}
       propertyPath: baseStats
@@ -4406,7 +4446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302588782
 RectTransform:
   m_ObjectHideFlags: 0

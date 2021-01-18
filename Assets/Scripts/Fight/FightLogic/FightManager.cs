@@ -44,8 +44,10 @@ public class FightManager : Singleton<FightManager>
         playerController.characters = new List<Character>();
         foreach (Character character in playerCharacters)
         {
+            character.BaseStatsScript.MaxHelth = 500;
+            character.BaseStatsScript.Health = 500;
             playerController.characters.Add(character);
-            Debug.Log(loadSave.StatsWarrior.Health);
+            
         }
 
         // загрузка монстров
@@ -138,18 +140,31 @@ public class FightManager : Singleton<FightManager>
             else ControlDeleteCharacters(playerController);
         }
 
-        
+        ControlDeleteCharacters(playerController);
+        ControlDeleteCharacters(enemyController);
+
     }
 
     private void ControlDeleteCharacters(FightController controller)
     {
-        foreach (Character character in controller.characters)
+        //foreach (Character character in controller.characters)
+        //{
+        //    if (character.BaseStatsScript == null || character.BaseStatsScript.Health <= 0)
+        //    {
+        //        controller.characters.Remove(character);
+        //        (enemyController as EnemyFightController).opponents.Remove(character);
+        //    }
+        //}
+
+        for (int i = 0; i < controller.characters.Count; i++)
         {
-            if (character.BaseStatsScript == null)
+            if (controller.characters[i].BaseStatsScript == null || controller.characters[i].BaseStatsScript.Health <= 0)
             {
-                controller.characters.Remove(character);
-                (enemyController as EnemyFightController).opponents.Remove(character);
+                controller.characters.RemoveAt(i);
+                i--;
             }
+                
+            
         }
     }
 
