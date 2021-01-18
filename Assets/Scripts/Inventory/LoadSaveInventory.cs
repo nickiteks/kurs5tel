@@ -55,6 +55,7 @@ public class LoadSaveInventory : MonoBehaviour
         stats.id = person.Id.Value;
         stats.ManaMax = person.ManaMax;
         stats.Mana = person.Mana;
+        stats.MaxHelth = person.Health;
         stats.Health = person.Health;
     }
 
@@ -101,7 +102,10 @@ public class LoadSaveInventory : MonoBehaviour
         ModelSave model = new ModelSave();
         model.User = Client.Instance.user;
         model.Persons = SavePersons();
-        model.InventoryPersons = SaveInventoryPersons();
+
+        var lists = SaveInventoryPersons();
+        if (lists.Count != 0) model.InventoryPersons = SaveInventoryPersons();
+
         model.InventoryUsers = SaveInventoryUser();
         SentSave(model);
     }

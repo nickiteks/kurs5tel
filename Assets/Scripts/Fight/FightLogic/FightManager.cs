@@ -44,8 +44,8 @@ public class FightManager : Singleton<FightManager>
         playerController.characters = new List<Character>();
         foreach (Character character in playerCharacters)
         {
-            character.BaseStatsScript.MaxHelth = 200;
-            character.BaseStatsScript.Health = 200;
+            //character.BaseStatsScript.MaxHelth = 200;
+            //character.BaseStatsScript.Health = 200;
             playerController.characters.Add(character);
             
         }
@@ -87,22 +87,26 @@ public class FightManager : Singleton<FightManager>
         if (state == FightState.EndStep)
         {
             ControlSwitchTurn();
-            ControlEndGame();
+            if (ControlEndGame()) return;
             StartCoroutine(StartNewStep());
         }
     }
 
-    private void ControlEndGame()
+    private bool ControlEndGame()
     {
         if (playerController.characters.Count == 0)
         {
             UIFightManager.Instance.OpenEndGamePanel();
+            return true;
         }
         else if (enemyController.characters.Count == 0)
         {
             UIFightManager.Instance.OpenWinPanel();
-            loadSave.SaveInventory();
+            //loadSave.SaveInventory();
+            return true;
         }
+
+        return false;
     }
 
     private void ControlSwitchTurn()
