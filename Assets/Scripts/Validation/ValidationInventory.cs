@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ValidationInventory : MonoBehaviour
+public class ValidationInventory
 {
-
     public bool CheckIdInventory(int idInventory,int idDatabaseInventory)
     {
         if(idDatabaseInventory != idInventory)
