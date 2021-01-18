@@ -6,6 +6,7 @@ using UnityEngine;
 public class Logger 
 {
     private readonly string filePath;
+
     public Logger(string fileName)
     {
         filePath = Application.streamingAssetsPath + "/Logs/" + fileName + ".txt";

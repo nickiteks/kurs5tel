@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,6 +11,7 @@ public class PlayerFightController : FightController
     private Character character;
     [SerializeField]
     private Inventory inventory;
+    private Logger logger = new Logger("fightActions");
 
     private void Start()
     {
@@ -29,7 +31,11 @@ public class PlayerFightController : FightController
         GameObject button = eventSystem.currentSelectedGameObject;
         if (MovingObgectManager.Instance.ItemInventory == null)
         {
-            action = character.spellBook[int.Parse(button.name)] as IUsable;
+            if (CheckSpellValidation.CheckSpellExists(button.name, character))
+            {
+                action = character.spellBook[int.Parse(button.name)] as IUsable;
+                logger.Log(action.ToString() + "|" + DateTime.Now);
+            }
         }
         else
         {
