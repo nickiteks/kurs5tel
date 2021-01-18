@@ -8,6 +8,7 @@ using UnityEngine;
 public class SavePositionScript : MonoBehaviour
 {
     public Transform[] player;
+    public LoadSaveInventory LoadSave;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,6 +16,7 @@ public class SavePositionScript : MonoBehaviour
     }
     private void Start()
     {
+        LoadSave.SaveInventory();
         Debug.Log(gameObject.name);
         if (PlayerPrefs.HasKey("Position"))
         {

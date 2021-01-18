@@ -46,6 +46,7 @@ public class PlayerFightController : FightController
                 inventory.AddInventoryItem(int.Parse(button.name), MovingObgectManager.Instance.ItemInventory);
                 MovingObgectManager.Instance.ItemInventory = null;
             }
+            MovingObgectManager.Instance.ItemInventory = null;
         }
         
         changeFightEvent.Invoke(FightState.ChoiceTarget);
@@ -107,6 +108,7 @@ public class PlayerFightController : FightController
     public void CancelChoiceTarget()
     {
         action = null;
+        MovingObgectManager.Instance.ItemInventory = null;
         changeFightEvent.Invoke(FightState.ChoiceAction);
     }
 }

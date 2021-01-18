@@ -44,8 +44,8 @@ public class FightManager : Singleton<FightManager>
         playerController.characters = new List<Character>();
         foreach (Character character in playerCharacters)
         {
-            character.BaseStatsScript.MaxHelth = 500;
-            character.BaseStatsScript.Health = 500;
+            character.BaseStatsScript.MaxHelth = 200;
+            character.BaseStatsScript.Health = 200;
             playerController.characters.Add(character);
             
         }
@@ -101,6 +101,7 @@ public class FightManager : Singleton<FightManager>
         else if (enemyController.characters.Count == 0)
         {
             UIFightManager.Instance.OpenWinPanel();
+            loadSave.SaveInventory();
         }
     }
 
@@ -132,9 +133,12 @@ public class FightManager : Singleton<FightManager>
             CurrentController.characters[indexCurrentCharacter].GetComponent<Image>().color = basicColorCharacter;
             indexCurrentCharacter++;
             CurrentController.characters[indexCurrentCharacter].GetComponent<Image>().color = activeColorCharacter;
-
-            UIFightManager.Instance.CloseTargetPanel();
-            UIFightManager.Instance.OpenActionPanel();
+            
+            if (IsStepFriendly)
+            {
+                UIFightManager.Instance.CloseTargetPanel();
+                UIFightManager.Instance.OpenActionPanel();
+            }
 
             if (IsStepFriendly) ControlDeleteCharacters(enemyController);
             else ControlDeleteCharacters(playerController);
@@ -160,6 +164,11 @@ public class FightManager : Singleton<FightManager>
         {
             if (controller.characters[i].BaseStatsScript == null || controller.characters[i].BaseStatsScript.Health <= 0)
             {
+                if (controller is PlayerFightController)
+                {
+                    (enemyController as EnemyFightController).opponents.RemoveAt(i);
+                }
+
                 controller.characters.RemoveAt(i);
                 i--;
             }
