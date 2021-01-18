@@ -27,7 +27,7 @@ public class UIFightManager : Singleton<UIFightManager>
     private float heightScrollView = 0;
     private void Start()
     {
-        RectTransform contentPanel = spellPanel.GetComponentInChildren<GridLayoutGroup>().GetComponent<RectTransform>();
+        RectTransform contentPanel = itemPanel.GetComponentInChildren<GridLayoutGroup>().GetComponent<RectTransform>();
         heightScrollView = contentPanel.rect.height;
     }
 
@@ -106,8 +106,9 @@ public class UIFightManager : Singleton<UIFightManager>
         }
     }
 
-    public void RefreshItemsPanel(Inventory inventory)
+    public void RefreshItemsPanel()
     {
-
+        RectTransform contentPanel = itemPanel.GetComponentInChildren<GridLayoutGroup>().GetComponent<RectTransform>();
+        //contentPanel.sizeDelta = new Vector2(0, heightScrollView);
     }
 }

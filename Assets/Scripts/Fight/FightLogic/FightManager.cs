@@ -45,6 +45,7 @@ public class FightManager : Singleton<FightManager>
         foreach (Character character in playerCharacters)
         {
             playerController.characters.Add(character);
+            Debug.Log(loadSave.StatsWarrior.Health);
         }
 
         // загрузка монстров
@@ -63,10 +64,10 @@ public class FightManager : Singleton<FightManager>
             BaseStatsScript baseStatsScriptMonster = monster.GetComponent<BaseStatsScript>();
             BaseStatsScript statsPrefab = monsterPrefab.GetComponent<BaseStatsScript>();
 
-            baseStatsScriptMonster.Mana = statsPrefab.Mana;
             baseStatsScriptMonster.ManaMax = statsPrefab.ManaMax;
-            baseStatsScriptMonster.Health = statsPrefab.Health;
+            baseStatsScriptMonster.Mana = statsPrefab.Mana;
             baseStatsScriptMonster.MaxHelth = statsPrefab.MaxHelth;
+            baseStatsScriptMonster.Health = statsPrefab.Health;
             baseStatsScriptMonster.Armor = statsPrefab.Armor;
             baseStatsScriptMonster.Damage = statsPrefab.Damage;
 

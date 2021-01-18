@@ -11,7 +11,12 @@ public class AccurateShot : Spell, IUsable
         if ((isSoloTarget && target.Length != 1) || target.Length == 0) return false;
         if (target.FirstOrDefault(x => x.IsEnemy != IsEnemy) != null) 
             return false;
-        //TODO: дописать как раз влияние на харрактеристики
+
+        foreach (Character character in target)
+        {
+            character.BaseStatsScript.Health -= impact;
+        }
+
         return true;
     }
 }

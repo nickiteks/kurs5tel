@@ -74,9 +74,9 @@ public class LoadSaveInventory : MonoBehaviour
 
     private void LoadItemsPersons(ModelSave model)
     {
-        LoadItemsToInventor(model.InventoryPersons[0], InventoryWarrior);
-        LoadItemsToInventor(model.InventoryPersons[1], InventoryMage);
-        LoadItemsToInventor(model.InventoryPersons[2], InventoryRogue);
+        if (InventoryWarrior) LoadItemsToInventor(model.InventoryPersons[0], InventoryWarrior);
+        if (InventoryMage) LoadItemsToInventor(model.InventoryPersons[1], InventoryMage);
+        if (InventoryRogue) LoadItemsToInventor(model.InventoryPersons[2], InventoryRogue);
     }
 
     private void LoadItemsToInventor(List<ItemPerson> items, Inventory inventory)
