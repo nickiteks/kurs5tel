@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ac119782dfff724eb78fd9428bae71d, type: 3}
-  m_Name: FireBall
+  m_Script: {fileID: 11500000, guid: 5d8960b61fd089c4aa7dc4245081a443, type: 3}
+  m_Name: DeadStar_Monster
   m_EditorClassIdentifier: 
-  id: 0
-  name: FireBall
-  img: {fileID: 21300000, guid: 2d0997ac1b1fd664e98202450e7ea2d7, type: 3}
-  manacost: 20
-  isSoloTarget: 1
-  IsEnemy: 1
-  impact: 100
+  id: 1
+  name: DeadStars
+  img: {fileID: 0}
+  manacost: 5
+  isSoloTarget: 0
+  IsEnemy: 0
+  impact: 15

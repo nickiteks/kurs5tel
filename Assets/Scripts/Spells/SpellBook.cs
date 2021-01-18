@@ -77,7 +77,6 @@ public class SpellBook : MonoBehaviour
         {
             GameObject newSpell = Instantiate(gameObjectShow, InventoryMainObject.transform) as GameObject;
 
-
             newSpell.name = i.ToString();
             SpellInBook spellInBook = new SpellInBook();
             spellInBook.spellGameObject = newSpell;

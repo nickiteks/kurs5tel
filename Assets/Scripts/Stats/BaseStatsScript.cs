@@ -66,7 +66,7 @@ public class BaseStatsScript : MonoBehaviour
     }
     private void Death()
     {
-        Debug.Log("смерть");
+        Destroy(gameObject);
     }
     public int MaxHelth
     {

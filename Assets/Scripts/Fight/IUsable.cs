@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IUsable
 {
-    bool useItem(Character[] target);
+    bool Use(Character[] target);
 }

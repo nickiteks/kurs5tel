@@ -18,11 +18,19 @@ public class SwitchSceneScript : MonoBehaviour
         else Debug.Log(SceneNotFoundException.SceneNotFound(nameSwitchLocation));
     }
 
+    public void LoadLocation(string nameLocation)
+    { 
+        SceneManager.LoadScene(nameLocation);
+        if (SwitchSceneValidation.HasScene(nameSwitchLocation)) SceneManager.LoadScene(nameLocation);
+        else Debug.Log(SceneNotFoundException.SceneNotFound(nameLocation));
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            UIManager.Instance.OpenSwitchScenePanel();
+            UIManager.Instance.OpenSwitchScenePanel(this);
         }
     }
+
 }

@@ -5,7 +5,10 @@ using UnityEngine;
 public abstract class Spell : ScriptableObject
 {
     public int id;
-    public string name;
+    public new string name;
     public Sprite img;
-    public int manacost;  
+    public int manacost;
+    public bool isSoloTarget;
+    public bool IsEnemy;
+    public int impact;
 }
