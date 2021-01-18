@@ -124,9 +124,9 @@ public class LoadSaveInventory : MonoBehaviour
     private List<List<ItemPerson>> SaveInventoryPersons()
     {
         List<List<ItemPerson>> items = new List<List<ItemPerson>>();
-        items.Add(ConvertInventoryPersons(InventoryWarrior));
-        items.Add(ConvertInventoryPersons(InventoryMage));
-        items.Add(ConvertInventoryPersons(InventoryRogue));
+        if (InventoryWarrior) items.Add(ConvertInventoryPersons(InventoryWarrior));
+        if (InventoryMage) items.Add(ConvertInventoryPersons(InventoryMage));
+        if (InventoryRogue) items.Add(ConvertInventoryPersons(InventoryRogue));
         return items;
     }
 
