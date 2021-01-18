@@ -19,8 +19,7 @@ public class SavePositionScript : MonoBehaviour
         if (PlayerPrefs.HasKey("Position"))
         {
             Loader();
-            PlayerPrefs.DeleteKey("Position");
-            
+            PlayerPrefs.DeleteKey("Position");            
             Destroy(gameObject);
         }
     }
@@ -38,8 +37,7 @@ public class SavePositionScript : MonoBehaviour
         for (int i = 0; i < player.Length; i++)
         {
            player[i].position = data;
-        }  
-
+        } 
     }  
 }
 [Serializable]
