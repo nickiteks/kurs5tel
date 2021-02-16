@@ -10,10 +10,18 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private RectTransform switchScenePanel;
 
+
+    [SerializeField]
+    private Canvas questMagazinePlayerCanvas;
+
+
+
     private void Update()
     {
         if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && !isIventoryOpen) OpenPlayerInventory();
-        else if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && isIventoryOpen) ClosePlayerInventory();     
+        else if (Input.GetKeyDown(InputManager.Instance.inventoryOpen) && isIventoryOpen) ClosePlayerInventory();
+
+        if (Input.GetKeyDown(InputManager.Instance.questMagazine) && !questMagazinePlayerCanvas.isActiveAndEnabled) OpenCanvas(questMagazinePlayerCanvas);
     }
     public void OpenSwitchScenePanel()
     {

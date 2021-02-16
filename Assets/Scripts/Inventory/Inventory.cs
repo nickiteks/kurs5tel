@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Linq;
 
 public class Inventory : MonoBehaviour
 {
@@ -91,6 +92,18 @@ public class Inventory : MonoBehaviour
             items[id].itemGameObject.GetComponentInChildren<TMP_Text>().text = "";
         }
         logger.Log("Добавлен предмет " + item.id);
+    }
+
+    public void AddItem(Item item, int count)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].id == 0)
+            {
+                AddItem(i, item, count);
+                return;
+            }
+        }
     }
     /// <summary>
     /// добавление уже существующего ItemInventory  в инвентарь

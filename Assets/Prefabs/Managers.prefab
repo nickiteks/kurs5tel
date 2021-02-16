@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3728927876116866779}
   m_Layer: 0
   m_Name: PlayerInventory
-  m_TagString: Untagged
+  m_TagString: PlayerInventory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 3728927876116866779}
   switchScenePanel: {fileID: 0}
+  questMagazinePlayerCanvas: {fileID: 0}
 --- !u!1 &3728927877062147529
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +315,7 @@ MonoBehaviour:
   inventoryOpen: 105
   interaction: 102
   map: 109
+  questMagazine: 121
 --- !u!1 &6709177368001597121
 GameObject:
   m_ObjectHideFlags: 0
