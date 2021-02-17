@@ -110,7 +110,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     /// <param name="id"></param>
     /// <param name="invItem"></param>
-    private void AddInventoryItem(int id, ItemInventory invItem)
+    public void AddInventoryItem(int id, ItemInventory invItem)
     {
         items[id].id = invItem.id;
         items[id].count = invItem.count;
@@ -133,7 +133,6 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < maxCount; i++)
         {
             GameObject newItem = Instantiate(gameObjectShow, InventoryMainObject.transform) as GameObject;
-
 
             newItem.name = i.ToString();
             ItemInventory itemInventory = new ItemInventory
@@ -187,8 +186,8 @@ public class Inventory : MonoBehaviour
             movingObgectManager.ItemInventory = CopyInventoryItem(items[currentID]);
             if(movingObgectManager.ItemInventory.id != 0)
             {
-                movingObject.gameObject.SetActive(true);
-                movingObject.GetComponent<Image>().sprite = data.items[movingObgectManager.ItemInventory.id].img;
+                if (movingObject) movingObject.gameObject.SetActive(true);
+                if (movingObject) movingObject.GetComponent<Image>().sprite = data.items[movingObgectManager.ItemInventory.id].img;
 
                 AddItem(currentID, data.items[0], 0);
             }
@@ -197,7 +196,7 @@ public class Inventory : MonoBehaviour
         {
             if (movingObgectManager.ItemInventory.id != 0)
             {
-                    ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
+                ItemInventory itemInventory = items[int.Parse(es.currentSelectedGameObject.name)];
 
                 if (movingObgectManager.ItemInventory.id != itemInventory.id)
                 {
@@ -229,7 +228,7 @@ public class Inventory : MonoBehaviour
             }
             currentID = -1;
             movingObgectManager.ItemInventory = null;
-            movingObject.gameObject.SetActive(false);
+            if (movingObject) movingObject.gameObject.SetActive(false);
         }
 
         UpdateInventiory();
@@ -237,7 +236,8 @@ public class Inventory : MonoBehaviour
 
     private void MoveObject()
     {
-        movingObject.position = Input.mousePosition + offset;
+        if (movingObject)
+            movingObject.position = Input.mousePosition + offset;
     }
     private ItemInventory CopyInventoryItem(ItemInventory old)
     {

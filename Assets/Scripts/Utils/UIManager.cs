@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -23,9 +24,10 @@ public class UIManager : Singleton<UIManager>
 
         if (Input.GetKeyDown(InputManager.Instance.questMagazine) && !questMagazinePlayerCanvas.isActiveAndEnabled) OpenCanvas(questMagazinePlayerCanvas);
     }
-    public void OpenSwitchScenePanel()
+    public void OpenSwitchScenePanel(SwitchSceneScript switchSceneScript)
     {
         switchScenePanel.gameObject.SetActive(true);
+        switchScenePanel.GetComponentInChildren<Button>().onClick.AddListener(delegate { switchSceneScript.LoadLocation(); });
     }
 
     public void CloseSwitchScenePanel()
