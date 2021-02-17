@@ -1,0 +1,19 @@
+SelectQuest - Подайте на пропитание
+SubmitQuest - Подайте на пропитание
+SelectQuest - ... а камень я не дам!
+SubmitQuest - ... а камень я не дам!
+SelectQuest - Подайте на пропитание
+SelectQuest - 123
+SubmitQuest - Подайте на пропитание
+SubmitQuest - 123
+SelectQuest - ... а камень я не дам!
+SubmitQuest - ... а камень я не дам!
+SelectQuest - Подайте на пропитание
+SelectQuest - 123
+SubmitQuest - Подайте на пропитание
+SubmitQuest - 123
+SelectQuest - Подайте на пропитание
+SelectQuest - 123
+SubmitQuest - Подайте на пропитание
+SubmitQuest - 123
+SelectQuest - ... а камень я не дам!

@@ -44,8 +44,11 @@ public class QuestPanelScript : MonoBehaviour
     [Tooltip("Кнопка взятия задания")]
     private Button selectedQuestButton;
 
+    private Logger logger;
+
     private void Awake()
     {
+        logger = new Logger("Quest");
         questMagazinePlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestMagazine>();
         inventory = GameObject.FindGameObjectWithTag("PlayerInventory").GetComponent<Inventory>();
     }
@@ -140,6 +143,7 @@ public class QuestPanelScript : MonoBehaviour
             inventory.AddItem(item, 1);
         }
 
+        logger.Log("SubmitQuest - " + Quest.NameQuest);
         Quest.isCompleted = true;
     }
 
@@ -148,6 +152,7 @@ public class QuestPanelScript : MonoBehaviour
     /// </summary>
     public void TakeQuest()
     {
+        logger.Log("SelectQuest - " + Quest.NameQuest);
         questMagazinePlayer.quests.Add(Quest);
     }
 }
