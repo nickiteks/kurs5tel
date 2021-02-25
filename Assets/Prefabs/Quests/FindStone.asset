@@ -26,3 +26,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a02e9289dea4bd42b6973827d2a93b9, type: 2}
   requirmentCompletedQuests:
   - {fileID: 11400000, guid: ad5546a98616a3a41a6d9feeffde23cc, type: 2}
+  - {fileID: 11400000, guid: 81d5741865a5c764a923302d4cbe9489, type: 2}

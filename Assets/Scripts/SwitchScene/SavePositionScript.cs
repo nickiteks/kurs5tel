@@ -9,18 +9,26 @@ public class SavePositionScript : MonoBehaviour
 {
     public Transform[] player;
 
+    [SerializeField]
+    private Inventory inventory;
+    [SerializeField]
+    private DatabaseInventory database;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Saver();        
     }
     private void Start()
     {
-        Debug.Log(gameObject.name);
         if (PlayerPrefs.HasKey("Position"))
         {
             Loader();
             PlayerPrefs.DeleteKey("Position");            
             Destroy(gameObject);
+
+            inventory.AddItem(database.items[5], 1);
+            inventory.AddItem(database.items[4], 1);
+            inventory.AddItem(database.items[1], 1);
         }
     }
     public void Saver()

@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53698f48cbd346e49946cd67c8a0a974, type: 3}
   m_Name: NewQuest
   m_EditorClassIdentifier: 
-  nameQuest: 
-  mainText: 
-  quickText: 
+  nameQuest: "\u0439\u0446\u0443"
+  mainText: "\u0439\u0446\u0443"
+  quickText: "\u0439\u0446\u0443"
   isCompleted: 0
-  neededItems: []
-  rewardItems: []
+  neededItems:
+  - {fileID: 11400000, guid: 164023f0248966f46bbdaf8e62d43f81, type: 2}
+  rewardItems:
+  - {fileID: 11400000, guid: 444fe29b81c3f3b4da70a1e981a042fa, type: 2}
   requirmentCompletedQuests: []

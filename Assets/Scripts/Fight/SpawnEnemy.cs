@@ -31,9 +31,7 @@ public class SpawnEnemy : MonoBehaviour
 				inventory = FindObjectOfType<Inventory>();
 				database = FindObjectOfType<DatabaseInventory>();
 
-				inventory.AddItem(database.items[5], 1);
-				inventory.AddItem(database.items[4], 1);
-				inventory.AddItem(database.items[1], 1);
+				
 			}
 			SceneManager.sceneLoaded -= OnSceneLoaded;
 			Destroy(gameObject);

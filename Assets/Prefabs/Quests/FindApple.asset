@@ -18,7 +18,7 @@ MonoBehaviour:
     \u043D\u0438\u0447\u0435\u0433\u043E \u043A\u0443\u043F\u0438\u0442\u044C. \u041C\u043E\u0436\u0435\u0448\u044C
     \u043D\u0430\u0439\u0442\u0438 \u0434\u043B\u044F \u043C\u0435\u043D\u044F \u044F\u0431\u043B\u043E\u043A\u043E?"
   quickText: "\u041D\u0430\u0439\u0442\u0438 \u044F\u0431\u043B\u043E\u043A\u043E"
-  isCompleted: 1
+  isCompleted: 0
   neededItems:
   - {fileID: 11400000, guid: 4dd6b34f1764c8a4d99e62c73960e63d, type: 2}
   rewardItems:

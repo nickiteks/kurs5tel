@@ -17,3 +17,5 @@ SelectQuest - 123
 SubmitQuest - Подайте на пропитание
 SubmitQuest - 123
 SelectQuest - ... а камень я не дам!
+SelectQuest - ... а камень я не дам!
+SubmitQuest - ... а камень я не дам!
