@@ -7,35 +7,46 @@ public class SpawnEnemy : MonoBehaviour
 {
 	[SerializeField]
 	private GameObject enemyEncounterPrefab;
+	[SerializeField]
+	private GameObject party;
+
+	private Inventory inventory;
+	private DatabaseInventory database;
 
 	private bool spawning = false;
 
 	void Start()
 	{
-		DontDestroyOnLoad(this.gameObject);
-
+		DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad(party.gameObject);
 		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		if (scene.name == "Battle")
+		if (scene.name != "FightScene")
 		{
 			if (this.spawning)
 			{
-				Instantiate(enemyEncounterPrefab);
+				inventory = FindObjectOfType<Inventory>();
+				database = FindObjectOfType<DatabaseInventory>();
+
+				inventory.AddItem(database.items[5], 1);
+				inventory.AddItem(database.items[4], 1);
+				inventory.AddItem(database.items[1], 1);
 			}
 			SceneManager.sceneLoaded -= OnSceneLoaded;
-			Destroy(this.gameObject);
+			Destroy(gameObject);
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "Player")
+		if (other.gameObject.CompareTag("Player"))
 		{
 			this.spawning = true;
-			SceneManager.LoadScene("Battle");
+			Time.timeScale = 0;
+			SceneManager.LoadScene("FightScene");
 		}
 	}
 }

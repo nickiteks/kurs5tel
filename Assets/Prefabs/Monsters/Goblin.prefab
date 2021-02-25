@@ -121,5 +121,5 @@ MonoBehaviour:
   mana: 100
   health: 1
   maxHelth: 1
-  armor: 20
+  armor: 1
   damage: 30

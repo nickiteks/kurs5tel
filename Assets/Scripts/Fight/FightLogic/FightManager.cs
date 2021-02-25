@@ -37,9 +37,9 @@ public class FightManager : Singleton<FightManager>
         IsStepFriendly = true;
 
         // загрузка игрока
-        playerCharacters[0].BaseStatsScript = loadSave.StatsWarrior;
-        playerCharacters[1].BaseStatsScript = loadSave.StatsMage;
-        playerCharacters[2].BaseStatsScript = loadSave.StatsRogue;
+        //playerCharacters[0].BaseStatsScript = loadSave.StatsWarrior;
+        //playerCharacters[1].BaseStatsScript = loadSave.StatsMage;
+        //  playerCharacters[2].BaseStatsScript = loadSave.StatsRogue;
 
         playerController.characters = new List<Character>();
         foreach (Character character in playerCharacters)
@@ -84,22 +84,29 @@ public class FightManager : Singleton<FightManager>
     {
         if (state == FightState.EndStep)
         {
+            if (ControlEndGame()) return;
             ControlSwitchTurn();
-            ControlEndGame();
             StartCoroutine(StartNewStep());
         }
     }
 
-    private void ControlEndGame()
+    private bool ControlEndGame()
     {
+        if (IsStepFriendly) ControlDeleteCharacters(enemyController);
+        else ControlDeleteCharacters(playerController);
+
         if (playerController.characters.Count == 0)
         {
             UIFightManager.Instance.OpenEndGamePanel();
+            return true;
         }
         else if (enemyController.characters.Count == 0)
         {
             UIFightManager.Instance.OpenWinPanel();
+            return true;
         }
+
+        return false;
     }
 
     private void ControlSwitchTurn()
@@ -137,25 +144,34 @@ public class FightManager : Singleton<FightManager>
             if (IsStepFriendly) ControlDeleteCharacters(enemyController);
             else ControlDeleteCharacters(playerController);
         }
-
-        
     }
 
     private void ControlDeleteCharacters(FightController controller)
     {
-        foreach (Character character in controller.characters)
+        //foreach (Character character in controller.characters)
+        //{
+        //    if (character.BaseStatsScript == null)
+        //    {
+        //        controller.characters.Remove(character);
+        //        (enemyController as EnemyFightController).opponents.Remove(character);
+        //    }
+        //}
+
+        for (int i = 0; i < controller.characters.Count; i++)
         {
-            if (character.BaseStatsScript == null)
+            if (controller.characters[i].BaseStatsScript.Health <= 0)
             {
-                controller.characters.Remove(character);
-                (enemyController as EnemyFightController).opponents.Remove(character);
+                (enemyController as EnemyFightController).opponents.Remove(controller.characters[i]);
+                controller.characters.RemoveAt(i);
+
+                i--;
             }
         }
     }
 
     private IEnumerator StartNewStep()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         CurrentController.StartStep(CurrentController.characters[indexCurrentCharacter]);
     }

@@ -52,7 +52,7 @@ public class BaseStatsScript : MonoBehaviour
             health = value;
             if (health <= 0)
             {
-                Death();
+                Destroy(gameObject);
             }
             if (health > maxHelth)
             {

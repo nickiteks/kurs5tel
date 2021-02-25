@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaMax: 100
   mana: 100
-  health: 400
-  maxHelth: 400
+  health: 1
+  maxHelth: 1
   armor: 1
   damage: 100
