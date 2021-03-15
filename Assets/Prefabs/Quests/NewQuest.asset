@@ -15,7 +15,7 @@ MonoBehaviour:
   nameQuest: "\u0439\u0446\u0443"
   mainText: "\u0439\u0446\u0443"
   quickText: "\u0439\u0446\u0443"
-  isCompleted: 0
+  isCompleted: 1
   neededItems:
   - {fileID: 11400000, guid: 164023f0248966f46bbdaf8e62d43f81, type: 2}
   rewardItems:
